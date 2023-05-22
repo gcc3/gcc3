@@ -32,6 +32,8 @@
     function redirectToClipboardView() {
       hideContents();
       document.getElementById("clipboard-view").style.display = "block";
+      const iframe = document.getElementById("iframe-clipboard");
+      iframe.src = iframe.src;  // refresh it.
     }
   </script>
 </head>

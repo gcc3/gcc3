@@ -1,43 +1,44 @@
 @import url(https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css);
 body {
-    font-family: "Fira Code VF", Helvetica, sans-serif;
+  font-family: "Fira Code VF", Helvetica, sans-serif;
+  margin: 10px 10px 20px 10px;
 }
 .wrapper {
-    padding: 0px 5px 0px 0px;
+  padding: 0px 5px 0px 0px;
 }
 .index {
-    width: 180px;
+  width: 180px;
 }
 .content {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 .wrapper-inline-block {
-    box-sizing: content-box;
-    font-size: 0;    
+  box-sizing: content-box;
+  font-size: 0;  
 }
 .wrapper-inline-block .index,
 .wrapper-inline-block .content {
-    display: inline-block;
-    vertical-align: top;    
-    font-size: 14px;
-    box-sizing: border-box;
+  display: inline-block;
+  vertical-align: top;  
+  font-size: 14px;
+  box-sizing: border-box;
 }
 .wrapper-inline-block .content {
-    width: calc(100% - 190px);
+  width: calc(100% - 190px);
 }
 iframe {
-    width: 100%;
-    height: 83%;
-    /*border: 1px solid;*/
+  width: 100%;
+  height: 83%;
+  /*border: 1px solid;*/
 }
 .index .tab {
-    margin-left: 20px;
+  margin-left: 20px;
 }
 .index .subject {
-    margin-top: 6px;
-    text-decoration: underline !important;
-    cursor: pointer;
+  margin-top: 6px;
+  text-decoration: underline !important;
+  cursor: pointer;
 }
 a {
-    color: black;
+  color: black;
 }
