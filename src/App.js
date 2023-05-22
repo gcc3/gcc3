@@ -1,11 +1,12 @@
 import React from "react";
+import ReactMarkdown from 'react-markdown';
 
 const App = () =>{
-    return (
-        <h1>
-	    Building in progress...
-        </h1>
-    )
+  return (
+    <ReactMarkdown>
+*(Building in progress...)*  
+    </ReactMarkdown>
+  )
 }
 
 export default App
