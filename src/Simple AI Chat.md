@@ -2,4 +2,6 @@
 Simple AI Chat
 ==============
 
-[live demo](https://simple-ai-chat.gcc3.com).
+[live demo](https://simple-ai-chat.gcc3.com).  
+
+A dialogue application implemented based on OpenAI's API, the backend of which can be customizable.  
