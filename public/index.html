@@ -41,13 +41,15 @@
     function collapseIndexIn() {
       document.getElementById("btn-collapse-index-in").style.display = "none";
       document.getElementById("btn-collapse-index-out").style.display = "block";
-      document.getElementById("index").style.display = "none";
+      document.querySelector(".index").style.display = "none";
+      document.querySelector(".wrapper-inline-block .content").style.width = "100%";
     }
 
     function collapseIndexOut() {
       document.getElementById("btn-collapse-index-in").style.display = "block";
       document.getElementById("btn-collapse-index-out").style.display = "none";
-      document.getElementById("index").style.display = "block";
+      document.querySelector(".index").style.display = "block";
+      document.querySelector(".wrapper-inline-block .content").style.width = "calc(100% - 190px";
     }
   </script>
 </head>
@@ -96,17 +98,17 @@
         <div id="root"></div>
         <script src="./main.js"></script>
       </div>
-      <div class="content-view" id="timeline-view" sytle="display:none">
+      <div class="content-view" id="timeline-view" style="display:none">
         <iframe id="iframe-timeline" frameBorder="0" scrolling="no"
           src="https://timeline.gcc3.com">
         </iframe>
       </div>
-      <div class="content-view" id="simple-ai-chat-view" sytle="display:none">
+      <div class="content-view" id="simple-ai-chat-view" style="display:none">
         <iframe id="iframe-simple-ai-chat" frameBorder="0"
           src="https://simple-ai-chat.gcc3.com">
         </iframe>
       </div>
-      <div class="content-view" id="clipboard-view" sytle="display:none">
+      <div class="content-view" id="clipboard-view" style="display:none">
         <iframe id="iframe-clipboard" frameBorder="0"
           src="https://clipboard.gcc3.com">
         </iframe>
