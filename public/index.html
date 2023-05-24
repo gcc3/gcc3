@@ -35,6 +35,18 @@
       const iframe = document.getElementById("iframe-clipboard");
       iframe.src = iframe.src;  // refresh it.
     }
+
+    function collapseIndexIn() {
+      document.getElementById("btn-collapse-index-in").style.display = "none";
+      document.getElementById("btn-collapse-index-out").style.display = "block";
+      document.getElementById("index").style.display = "none";
+    }
+
+    function collapseIndexOut() {
+      document.getElementById("btn-collapse-index-in").style.display = "block";
+      document.getElementById("btn-collapse-index-out").style.display = "none";
+      document.getElementById("index").style.display = "block";
+    }
   </script>
 </head>
 
@@ -48,8 +60,12 @@
   <p>Coding a better world～☕</p>
   <hr>
   <div class="wrapper wrapper-inline-block">
-    <div class="index">
-      <h4>Projects</h4>
+    <div id="index" class="index">
+      <div style="display:flex;justify-content:space-between;height:38px">
+        <h4>Projects</h4>
+        <h4 id="btn-collapse-index-in" class="btn-collapse-index" onclick="collapseIndexIn()"><<</h4>
+        <h4 id="btn-collapse-index-out" style="display:none" class="btn-collapse-index" onclick="collapseIndexOut()">>></h4>
+      </div>
       <p>
         <div class="subject" onclick="redirectToMainView()">timeline</div>
         <div class="tab subject" onclick="redirectToTimelineView()">live demo</div>

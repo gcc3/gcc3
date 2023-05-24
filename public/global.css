@@ -42,3 +42,7 @@ iframe {
 a {
   color: black;
 }
+.btn-collapse-index {
+  width: 30px;
+  cursor: pointer;
+}
