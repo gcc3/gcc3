@@ -27,6 +27,8 @@
     function redirectToSimpleAiChatView() {
       hideContents();
       document.getElementById("simple-ai-chat-view").style.display = "block";
+      const iframe = document.getElementById("iframe-simple-ai-chat");
+      iframe.src = iframe.src;  // refresh it.
     }
     
     function redirectToClipboardView() {
