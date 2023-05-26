@@ -40,7 +40,12 @@ iframe {
 a {
   color: black;
 }
-.btn-collapse-index {
+#btn-collapse-index-out {
+  width: 10px;
+}
+#btn-collapse-index-in {
   width: 30px;
+}
+.btn-collapse-index {
   cursor: pointer;
 }
