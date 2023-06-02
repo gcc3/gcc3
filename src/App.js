@@ -1,8 +1,8 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import Timeline from "./post/Timeline.md";
-import SimpleAiChat from "./post/Simple AI Chat.md";
-import PlainTextNote from "./post/Plain Text Note.md";
+import Timeline from "./projects/Timeline.md";
+import SimpleAiChat from "./projects/Simple AI Chat.md";
+import PlainTextNote from "./projects/Plain Text Note.md";
 
 const App = () =>{
   return (
