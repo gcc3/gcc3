@@ -12,6 +12,5 @@ Use `:help` to show commands.
 
 * Todos  
 
-Add `entry [entry]` command to show detail.  
 Extract keywords to imporve searching.  
 AI links to AI.  
