@@ -17,13 +17,14 @@
       window.dispatchEvent(event);
     }
 
-    function redirectToNoteList() {
-      changeContentView("noteList");
+    function redirectToNotes() {
+      changeContentView("notes");
     }
 
     function redirectToMainView() {
       hideAllContents();
       document.getElementById("main-view").style.display = "block";
+      changeContentView("projects");
     }
 
     function redirectToTimelineView() {
@@ -90,7 +91,7 @@
       </p>
       <p>
         <div class="subject" onclick="redirectToMainView()">plain text note</div>
-        <div class="tab subject" onclick="redirectToNoteList()">note list</div>
+        <div class="tab subject" onclick="redirectToNotes()">note list</div>
       </p>
       <h4>Tools</h4>
       <div class="project">

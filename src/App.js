@@ -6,7 +6,7 @@ import PlainTextNote from "./projects/Plain Text Note.md";
 import UnixNote from "./note/.markdown/Unix Note.md";
 
 const App = () => {
-  const [contentView, setContentView] = useState("null");
+  const [contentView, setContentView] = useState("projects");
 
   useEffect(() => {
     window.addEventListener('changeContentView', (e) => {
@@ -19,18 +19,18 @@ const App = () => {
       <ReactMarkdown>
         *(Building in progress...)*  
       </ReactMarkdown>
-      {contentView === "null" ? 
-        (
-          <div>
-            <ReactMarkdown children={`${Timeline}`} />
-            <ReactMarkdown children={`${SimpleAiChat}`} />
-            <ReactMarkdown children={`${PlainTextNote}`} />
-          </div>
-        ) : (
-          <div>
-            <ReactMarkdown children={`${UnixNote}`} />
-          </div>
-        )}
+      {contentView === "projects" &&
+        <>
+          <ReactMarkdown children={`${Timeline}`} />
+          <ReactMarkdown children={`${SimpleAiChat}`} />
+          <ReactMarkdown children={`${PlainTextNote}`} />
+        </>
+      }
+      {contentView === "notes" &&
+        <div>
+          <ReactMarkdown children={`${UnixNote}`} />
+        </div>
+      }
     </>
   )
 }
