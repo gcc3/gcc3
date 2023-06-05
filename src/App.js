@@ -19,14 +19,16 @@ const App = () => {
       <ReactMarkdown>
         *(Building in progress...)*  
       </ReactMarkdown>
-      {contentView === "projects" &&
+      {
+        contentView === "projects" &&
         <>
           <ReactMarkdown children={`${Timeline}`} />
           <ReactMarkdown children={`${SimpleAiChat}`} />
           <ReactMarkdown children={`${PlainTextNote}`} />
         </>
       }
-      {contentView === "notes" &&
+      {
+        contentView === "notes" &&
         <div>
           <ReactMarkdown children={`${UnixNote}`} />
         </div>
