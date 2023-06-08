@@ -50,24 +50,23 @@
       document.getElementById("btn-collapse-index-in").style.display = "block";
       document.getElementById("btn-collapse-index-out").style.display = "none";
       document.querySelector(".index").style.display = "inline-block";
-      document.querySelector(".content").style.width = "calc(100% - 190px)";
-      document.querySelector(".content").style.marginLeft = "180px";
+      document.querySelector(".content").style.width = "calc(100% - 193px)";
+      document.querySelector(".content").style.marginLeft = "193px";
     }
   </script>
 </head>
 
 <body>
-  <div>
-    <a href="https://www.gcc3.com" style="text-decoration:none">
-      <h1 style="display:inline">GCC</h1>
-      <div style="display:inline;vertical-align:top;">3</div>
-      <div id="label-lab">lab</div>
-    </a>
-    <p>Coding a better world～☕</p>
-    <hr>
-  </div>
   <div class="wrapper wrapper-inline-block">
     <div class="index">
+      <div class="title">
+        <a href="https://www.gcc3.com" style="text-decoration:none">
+          <h1 style="display:inline">GCC</h1>
+          <div style="display:inline;vertical-align:top;">3</div>
+          <div id="label-lab">lab</div>
+        </a>
+        <p>Coding a better world～☕</p>
+      </div>
       <div style="display:flex;justify-content:space-between;height:38px">
         <h4>Projects</h4>
         <h4 id="btn-collapse-index-in" class="btn-collapse-index" onclick="collapseIndexIn()"><<</h4>

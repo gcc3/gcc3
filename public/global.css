@@ -6,13 +6,18 @@ body {
 .wrapper {
   padding: 0px 5px 0px 0px;
 }
+.title {
+  margin-top: 10px;
+}
 .index {
-  width: 180px;
+  width: 170px;
+  height: 100%;
   position: fixed;
+  border-right: 1px solid gray;
 }
 .content {
-  margin-left: 180px;
-  width: calc(100% - 190px);
+  margin-left: 193px;
+  width: calc(100% - 193px);
 }
 .wrapper-inline-block {
   box-sizing: content-box;
