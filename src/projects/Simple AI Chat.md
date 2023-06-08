@@ -30,7 +30,12 @@ Promopts provided by the [Awesome ChatGPT Prompts](https://github.com/f/awesome-
 1. Install `node` and `npm`  
 2. Install [carbonyl](https://github.com/fathyb/carbonyl)  
 `npm install --global carbonyl`  
-3. `carbonyl https://simple-ai-chat.gcc3.com`  
+3. Run `carbonyl https://simple-ai-chat.gcc3.com`  
+
+Or use docker
+1. Install docker
+2. Run `docker run -ti fathyb/carbonyl https://simple-ai-chat.gcc3.com`  
+
 Have fun!  
 
 * Todos  
