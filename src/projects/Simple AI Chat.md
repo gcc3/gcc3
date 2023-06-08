@@ -25,7 +25,7 @@ To use roleplay, samply type `:role use [role_name]`.
 Use `:role list` to check current avaiable roles.  
 Promopts provided by the [Awesome ChatGPT Prompts](https://github.com/f/awesome-chatgpt-prompts)
 
-* Commandline run
+* Command-line run
 
 1. Install `node` and `npm`  
 2. Install [carbonyl](https://github.com/fathyb/carbonyl)  
