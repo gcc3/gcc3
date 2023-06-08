@@ -8,6 +8,7 @@ body {
 }
 .index {
   width: 180px;
+  position: fixed;
 }
 .content {
   margin-left: 10px;

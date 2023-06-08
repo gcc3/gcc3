@@ -51,7 +51,7 @@
       document.getElementById("btn-collapse-index-out").style.display = "none";
       document.querySelector(".index").style.display = "inline-block";
       document.querySelector(".content").style.width = "calc(100% - 190px)";
-      document.querySelector(".content").style.marginLeft = "10px";
+      document.querySelector(".content").style.marginLeft = "180px";
     }
   </script>
 </head>
@@ -67,7 +67,7 @@
     <hr>
   </div>
   <div class="wrapper wrapper-inline-block">
-    <div id="index" class="index">
+    <div class="index">
       <div style="display:flex;justify-content:space-between;height:38px">
         <h4>Projects</h4>
         <h4 id="btn-collapse-index-in" class="btn-collapse-index" onclick="collapseIndexIn()"><<</h4>
@@ -99,7 +99,7 @@
       </p>
       <a href="https://github.com/lhypds"><img src="img/github.ico" width="16" height="16"></a>
     </div>
-    <div class="content">
+    <div class="content" style="margin-left:180px">
       <div class="content-view" id="main-view">
         <div id="root"></div>
         <script src="./main.js"></script>
