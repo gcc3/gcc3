@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
-import UnixNote from "./note/.markdown/Unix Note.md";
 import rehypeRaw from 'rehype-raw'
 
 const App = () => {
