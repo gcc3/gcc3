@@ -8,3 +8,4 @@ src/note/
 .cache
 .eslintcache
 package-lock.json
+.env
