@@ -40,6 +40,9 @@ const App = () => {
       <ReactMarkdown>
         *(Building in progress...)*
       </ReactMarkdown>
+      <ReactMarkdown>
+        *Welcome to [join](mailto:lhypds.dev@gmail.com) any of the projects.*
+      </ReactMarkdown>
       {
         contentView === "projects" &&
         <div>
