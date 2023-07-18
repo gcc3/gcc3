@@ -50,7 +50,7 @@ Use `:speak stop` to stop the speaking.
 To change language use `:lang use [language code]`  
 
 
-Command-line run
+Command-line Run
 ----------------
 
 1. Install `node` and `npm`  
@@ -66,8 +66,8 @@ Or, use docker
 Have fun!  
 
 
-Some more challedging and fun tasks
------------------------------------
+Some Challenging Fun Tasks
+--------------------------
 
 1. Intergrate LangChain to support document query. (In progress)  
 2. Generate image from the stable-diffusion AI.  
