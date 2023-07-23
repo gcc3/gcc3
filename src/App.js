@@ -55,9 +55,6 @@ const App = () => {
           <div id="plain-text-note">
             {plainTextNote && <ReactMarkdown children={`${plainTextNote}`} />}
           </div>
-          <ReactMarkdown>
-            *Welcome to [join](mailto:lhypds.dev@gmail.com) any of the projects.*
-          </ReactMarkdown>
         </div>
       }
       {
