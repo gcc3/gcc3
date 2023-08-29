@@ -5,8 +5,6 @@ Simple AI Chat
 
 Simple AI Chat is now avaiable at [simple-ai.io](https://simple-ai.io)  
 
-[live demo](https://simple-ai-chat.gcc3.com).  
-
 A dialogue application implemented based on OpenAI's API.  
 The backend of which can be customizable.  
 
@@ -48,6 +46,9 @@ To enable use `:location on`
 Use `:speak on` to turn on the speak after generating.  
 Use `:speak stop` to stop the speaking.  
 To change language use `:lang use [language code]`  
+
+* AI links to AI (experimental)  
+Use function calling to link to another AI (core AI)  
 
 
 Command-line Run
