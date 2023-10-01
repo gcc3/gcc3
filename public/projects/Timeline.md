@@ -13,4 +13,4 @@ Utilizing the Timeline application from MIT's open-source project [SIMILE](https
     </iframe>
 </div>
 
-ARTIFICIAL INTELLIGENCE HISTORY TIMELINE [https://timeline.gcc3.com/ai](https://timeline.gcc3.com) (in progress...)  
+ARTIFICIAL INTELLIGENCE HISTORY TIMELINE [https://timeline.gcc3.com/ai](https://timeline.gcc3.com/ai) (in progress...)  
