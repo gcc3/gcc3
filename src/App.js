@@ -41,7 +41,7 @@ const App = () => {
         contentView === "projects" &&
         <div>
           <ReactMarkdown>
-            *Welcome to [join](mailto:soft@gochaichai.com) any of the projects.*
+            *Welcome to [join](https://github.com/gcc3) any of the projects.*
           </ReactMarkdown>
           <div id="timeline">
             {timeline && <ReactMarkdown children={`${timeline}`} rehypePlugins={[rehypeRaw]} />}
