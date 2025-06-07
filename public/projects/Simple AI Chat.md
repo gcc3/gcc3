@@ -1,103 +1,101 @@
 
-Simple AI Chat
-==============
+Simple AI
+=========
 
-GitHub: [simple-ai-chat](https://github.com/gcc3/simple-ai-chat)  
+Simple AI (`simple-ai-chat`) is a command-based AI chat application that supports both the web and CLI, aimed at providing users with an easy and simple AI experience.
+It can use advanced large language models (LLMs) from multiple companies: OpenAI, xAI, Google AI, Anthropic, and Ollama models.
 
-Simple AI Chat is now avaiable at [simple-ai.io](https://simple-ai.io)  
+Text generation, image generation, and vision models are supported.
+Features like function calling and the Model Control Protocol (MCP) are also supported.
 
-A dialogue application implemented based on OpenAI's API.  
-The backend of which can be customizable.  
-
-
-Main Features
--------------
-
-Commands are supported, use `:help` to show commands.  
-
-* Dictionary search  
-A local dictionary will be used as messages to let AI reference to enhance the AI response quality.  
-To check/add entry use `:entry list`, `:search [keyword]`, and `:entry add`. 
-
-* Function calling  
-Support for [function calling](https://openai.com/blog/function-calling-and-other-api-updates), the AI can call the function itself, and with the description it can know when to use the function. Amazing!  
-To list available functions, use `:function ls`  
-To execute a function from input, use `!function_name(argument=value)`  
-Example: `!get_weather(localtion=Tokyo)`  
-
-* Session  
-Use `:info` to check the current session ID, and attach the session with `:session [session_id]` to continue the previous talk.  
-Use `:log` to show the current conversation history.  
-
-* Roleplay  
-To use roleplay, simply type `:role use [role_name]`.  
-Use `:role list` to check current available roles.  
-Prompts provided by the Awesome ChatGPT Prompts  
-
-* Self Result Evaluation  
-I found that the AI can evaluate the result of itself very well.  
-And this can solve the credibility problem in dictionary searches.  
-To show the stats information includings the self result evaluation use `:stats on`.  
-
-* Location Service  
-Use the device location to enhance the geology location based questions (like weather or time).  
-To enable use `:location on`  
-
-* Speak  
-Use `:speak on` to turn on the speak after generating.  
-Use `:speak stop` to stop the speaking.  
-To change language use `:lang use [language code]`  
-
-* AI links   
-Refer AI Links below.
-
-* Vector Database  
-Query data from vector database engine.  
-Currently support [Vectara](https://vectara.com/).  
-
-* Color Theme  
-Use `:theme [light/dark]` to change color theme.  
-
-* Full Screen Mode  
-Use `:fullscreen on` to turn on fullscreen mode.  
+The application is deployed at [simple-ai.io](https://simple-ai.io).  
 
 
-AI Links
+Quick Start
+-----------
+
+Web use  
+https://simple-ai.io
+
+Command-line interface (CLI) use  
+Install: npm i simple-ai-chat -g  
+Start: schat  
+npm package: simple-ai-chat  
+
+MCP client  
+Install: npm i simple-ai-chat -g  
+Use smcp (or just schat) to start the client service.  
+The mcpconfig.json file is located in the ~/.simple.  
+
+Ollama  
+Set the environment variable OLLAMA_ORIGINS to * or your domain to allow CORS.  
+Use :model ls to list the models, and :model use <model> to use the Ollama models.  
+To use function calling, set :stream off as in Ollama it's not supported.  
+
+
+Features
 --------
 
-Simple AI is able to link to another support AI by function calling.  
+- Text Generation  
+Chat with the state-of-the-art LLM powered by OpenAI, xAI, Google, Anthropic, Ollama and more...
 
-The API response format must be
+- GPT Vision  
+Interact with powerful vision models. To use Vision model, paste or drag and drop the image to the input box.
 
-```json
-{
-    "result": "Sample result text."
-}
-```
+- Image Generation & Edit  
+Generate beautiful images using prompts, and edit generated or uploaded images, or combine images to one image based on your instructions.
 
-Also, 2 projects [simple-ai-node](https://github.com/gcc3/simple-ai-node) and [simple-ai-hub](https://github.com/gcc3/simple-ai-hub) are provided.  
-To use multiple AI node, a AI hub is suggested, it can send query to multipe node simultaneously.  
+- Model Context Protocol (MCP)  
+Simple AI functions as a Model Context Protocol (MCP) client. Connect to MCP servers to access a wealth of data and applications.
 
+- File Input  
+Upload files (supporting plain text, DOCX, PDF, JSON), and they will be processed as text. The results will be inserted into the prompt and will provide a GPT reference.
 
-Command-line Run
-----------------
+- Roles  
+Allow GPT to act as a role to provide more satisfactory answers. You can either use pre-defined system roles or create custom instruction prompts to tailor user roles to your specific requirements.
 
-1. Install `node` and `npm`  
-2. Install [carbonyl](https://github.com/fathyb/carbonyl)  
-`npm install --global carbonyl`  
-3. Run `carbonyl https://simple-ai.io`  
+- Data Stores  
+Support for files and relational database queries. If a store is used, the query results will be inserted as prompts to provide knowledgeable answers. Multiple data stores can be used simultaneously.
 
-Or, use docker  
+- Nodes (Node AI)  
+Connect to another AI or any data source to use its data. When a node is used, the results will be utilized as prompts provided for the AI.
 
-1. Install docker
-2. Run `docker run -ti fathyb/carbonyl https://simple-ai.io`  
+- Enhanced Knowledge & Mathematics (WolframAlpha)  
+As one of the AI callable function, WolframAlpha is a highly capable computational knowledge engine that enhances the reliability of answers provided.
 
-Have fun!  
+- Command-line Interface (CLI)  
+Command-line interface software is provided via the Node Package Manager (npm) and supports the same features as the web UI.
+More features:
 
+- Full-screen mode and split-screen mode  
+For easy use requiring extensive input and output, such as programmers, essay writer. To use split-screen mode, use command `:fullscreen split`.
 
-Some Challenging Fun Tasks
---------------------------
+- De-hallucination  
+Detect hallucinations in chat to provide more trustworthiness. When the AI exhibits hallucination, it can sometimes generate completely fabricated answers. By enabling the dehallucination feature, a message in stats (`self_eval_score`) will be displayed along with statistics to allow users to judge the accuracy of the information. Essentially, this feature resends the user's input and the AI's output, along with reference information, back to AI for self-evaluation. Use command `:stats on`, and `:eval on` to turn on it.
 
-1. Intergrate LangChain to support document query. (done)  
-2. Generate image from the stable-diffusion AI.  
-3. AI links to AI. (done)  
+- TTS voice  
+Reading with an option to select from the system's local TTS voice library, use command `:speak on` to enable.
+
+- Themes  
+Supports 3 themes: Light mode, Dark mode, and Matrix-style Terminal mode.
+
+- Function calls  
+GPT will choose function to use to get information it needs. Such as weather and time queries. Functions can be called by user directly from the input as well. To list all available functions use `:function ls`. Also refer: Functions
+
+- Page redirection  
+As one of the `functions calls`, `redirect_to_url()` can redirect or open URL in a new tab. GPT will do it automatically, for example: Open the official website of OpenAI. You can use it to open multiple URLs, simultaneously.
+
+- Location-based query  
+Questioning based on user's geographic location information. e.g., answering `How's the weather today?` by automatically obtaining the location. To use location feature, use command `:location on`.
+
+- Code highlighting  
+Code highlighting for different themes, support all programming languages.
+
+- Mathematical Equation  
+Supports the display of mathematical equations in LaTeX format in the results. When user copy the text in equation, the original LaTeX will be copied.
+
+- Shortcuts  
+Supports convenient shortcut operations. Refer: `Shortcuts`
+
+- Internationalization and localization  
+Simple AI supports 18 languages: Arabic, Bengali, Chinese, Dutch, English, French, German, Hindi, Indonesian, Italian, Japanese, Korean, Polish, Portuguese, Russian, Spanish, Swedish, Turkish. Please let us know if you need support for your language.
