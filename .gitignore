@@ -1,6 +1,8 @@
 node_modules/
 public/main.js
 public/note/
+public/downloads/
+public/t
 .DS_Store
 *.log
 .idea
@@ -9,4 +11,3 @@ public/note/
 .eslintcache
 package-lock.json
 .env
-public/test.*
