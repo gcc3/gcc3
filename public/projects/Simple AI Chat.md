@@ -2,7 +2,10 @@
 simple ai - chat
 ================
 
+
 [https://simple-ai.io](https://simple-ai.io)  
+
+GitHub: [gcc3/simple-ai-chat](https://github.com/gcc3/simple-ai-chat)  
 
 Simple AI (`simple-ai-chat`) is a command-based AI chat application that supports both the web and CLI, aimed at providing users with an easy and simple AI experience.
 It can use advanced large language models (LLMs) from multiple companies: OpenAI, xAI, Google AI, Anthropic, and Ollama models.
