@@ -1,6 +1,6 @@
 
-Plain Text Note
-===============
+notes (plain text)
+==================
 
 
 * Why Use Plain Text Notes  

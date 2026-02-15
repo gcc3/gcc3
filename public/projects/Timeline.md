@@ -1,5 +1,5 @@
 
-Timeline
+timeline
 ========
 
 GitHub: [timeline](https://github.com/gcc3/timeline) [timeline-api](https://github.com/gcc3/timeline-api)  

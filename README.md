@@ -21,6 +21,11 @@ Install
 npm install
 ```
 
+Fetch notes to public/notes:
+```
+git clone https://github.com/lhypds/note
+```
+
 
 Development
 -----------
