@@ -1,35 +1,42 @@
 @import url(https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css);
+
 body {
   font-family: "Fira Code VF", Helvetica, sans-serif;
   margin: 10px 10px 20px 10px;
 }
+
 .wrapper {
   padding: 0px 5px 0px 0px;
 }
+
 .title {
   margin-top: 10px;
 }
+
 .index {
   width: 170px;
   height: 100%;
   position: fixed;
   border-right: 1px solid gray;
 }
+
 .content {
   margin-left: 193px;
   width: calc(100% - 193px);
 }
+
 .wrapper-inline-block {
   box-sizing: content-box;
-  font-size: 0;  
+  font-size: 0;
 }
 .wrapper-inline-block .index,
 .wrapper-inline-block .content {
   display: inline-block;
-  vertical-align: top;  
+  vertical-align: top;
   font-size: 14px;
   box-sizing: border-box;
 }
+
 .index .tab {
   margin-left: 20px;
 }
@@ -38,9 +45,11 @@ body {
   text-decoration: underline !important;
   cursor: pointer;
 }
+
 a {
   color: black;
 }
+
 #btn-collapse-index-out {
   width: 10px;
 }
@@ -50,6 +59,7 @@ a {
 .btn-collapse-index {
   cursor: pointer;
 }
+
 #label-lab {
   display: inline;
   vertical-align: middle;
@@ -59,15 +69,19 @@ a {
   font-size: 13px;
   padding: 1px;
 }
+
 ul {
   padding-left: 14px;
 }
+
 ol {
   padding-left: 26px;
 }
+
 html {
   scroll-behavior: smooth;
 }
+
 p > code,
 li > code,
 dd > code,
@@ -75,6 +89,6 @@ td > code {
   background: #f6f6f6;
   word-wrap: break-word;
   box-decoration-break: clone;
-  padding: .1rem .3rem .2rem;
-  border-radius: .2rem;
+  padding: 0.1rem 0.3rem 0.2rem;
+  border-radius: 0.2rem;
 }

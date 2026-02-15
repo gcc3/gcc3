@@ -43,11 +43,11 @@ const App = () => {
           <ReactMarkdown>
             *Welcome to [join](https://github.com/gcc3) any of the projects.*
           </ReactMarkdown>
-          <div id="timeline">
-            {timeline && <ReactMarkdown children={`${timeline}`} rehypePlugins={[rehypeRaw]} />}
-          </div>
           <div id="simple-ai-chat">
             {simpleAiChat && <ReactMarkdown children={`${simpleAiChat}`} />}
+          </div>
+          <div id="timeline">
+            {timeline && <ReactMarkdown children={`${timeline}`} rehypePlugins={[rehypeRaw]} />}
           </div>
           <div id="plain-text-note">
             {plainTextNote && <ReactMarkdown children={`${plainTextNote}`} />}
