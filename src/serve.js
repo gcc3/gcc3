@@ -60,8 +60,7 @@ app.get('/api/notes/:category_name', (req, res) => {
       const files = entries
         .filter((entry) => entry.isFile() && path.extname(entry.name).toLowerCase() === '.md')
         .map((entry) => entry.name)
-        .sort((a, b) => a.localeCompare(b))
-        .slice(0, NOTES_LIMIT);
+        .sort((a, b) => a.localeCompare(b));
       res.json(files);
     });
   });
