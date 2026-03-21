@@ -22,16 +22,16 @@
 
       function collapseSidebar(in_ = true) {
         if (in_) {
-          document.getElementById("btn-collapse-index-in").style.display = "none";
-          document.getElementById("btn-collapse-index-out").style.display = "block";
-          document.getElementById("btn-collapse-index-out").style.position = "fixed";
-          document.getElementById("btn-collapse-index-out").style.bottom = "10px";
+          document.getElementById("btn-collapse-sidbar").style.display = "none";
+          document.getElementById("btn-expand-sidbar").style.display = "block";
+          document.getElementById("btn-expand-sidbar").style.position = "fixed";
+          document.getElementById("btn-expand-sidbar").style.bottom = "10px";
           document.querySelector(".sidebar").style.display = "none";
           document.querySelector(".content").style.width = "100%";
           document.querySelector(".content").style.marginLeft = "0px";
         } else {
-          document.getElementById("btn-collapse-index-in").style.display = "block";
-          document.getElementById("btn-collapse-index-out").style.display = "none";
+          document.getElementById("btn-collapse-sidbar").style.display = "block";
+          document.getElementById("btn-expand-sidbar").style.display = "none";
           document.querySelector(".sidebar").style.display = "inline-block";
           document.querySelector(".content").style.width = "calc(100% - var(--index-width) - 13px)";
           document.querySelector(".content").style.marginLeft = "calc(var(--index-width) + 13px)";
@@ -56,7 +56,7 @@
         <!-- Index -->
         <div style="display: flex; justify-content: space-between; height: 38px">
           <h4>projects</h4>
-          <h5 id="btn-collapse-index-in" class="btn-collapse-index" onclick="collapseSidebar()"><<</h5>
+          <h5 id="btn-collapse-sidbar" class="btn-collapse-index" onclick="collapseSidebar()"><<</h5>
         </div>
         <p>
           <a class="subject" href="#simple-ai-chat" onclick="redirectTo('projects')">simple ai - chat</a>
@@ -89,7 +89,7 @@
         </div>
         <div style="height: 40px"></div>
         <div
-          id="btn-collapse-index-out"
+          id="btn-expand-sidbar"
           class="btn-collapse-index"
           style="display: none; font-size: 20px; text-align: center"
           onclick="collapseSidebar(false)"
