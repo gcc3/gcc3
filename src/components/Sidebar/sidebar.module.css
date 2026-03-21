@@ -6,13 +6,8 @@
   text-decoration: none;
 }
 
-.brandMain {
+.brand {
   display: inline;
-}
-
-.brandSup {
-  display: inline;
-  vertical-align: top;
 }
 
 .categoryRow {
@@ -41,14 +36,4 @@
   margin-top: 6px;
   text-decoration: underline !important;
   cursor: pointer;
-}
-
-.lab {
-  display: inline;
-  vertical-align: middle;
-  border: 1px solid;
-  border-color: gray;
-  border-radius: 2px;
-  font-size: 13px;
-  padding: 1px;
 }

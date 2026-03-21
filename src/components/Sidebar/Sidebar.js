@@ -1,14 +1,13 @@
 import React from "react";
 import styles from "./sidebar.module.css";
+import { SITE_NAME, SITE_PUBLIC_URL } from "../../constants";
 
 const Sidebar = ({ category, notes, onCollapse }) => {
   return (
     <div className={styles.sidebar}>
       <div className={styles.title}>
-        <a href="https://www.gcc3.com" className={styles.linkReset}>
-          <h1 className={styles.brandMain}>GCC</h1>
-          <div className={styles.brandSup}>3</div>
-          <div className={styles.lab}>lab</div>
+        <a href={SITE_PUBLIC_URL} className={styles.linkReset}>
+          <h1 className={styles.brand}>{SITE_NAME}</h1>
         </a>
       </div>
 
