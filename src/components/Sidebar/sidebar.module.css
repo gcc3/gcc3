@@ -46,6 +46,7 @@
   border-right: 1px solid gray;
   overflow-y: auto;
   overflow-x: hidden;
+  overscroll-behavior-y: none;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
