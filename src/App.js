@@ -5,6 +5,7 @@ const App = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [category, setCategory] = useState("");
   const [categories, setCategories] = useState([]);
+  const [notes, setNotes] = useState([]);
 
   useEffect(() => {
     fetch("/api/categories")
@@ -22,6 +23,18 @@ const App = () => {
     setCategory(firstCategory);
   }, [categories]);
 
+  useEffect(() => {
+    if (!category) {
+      setNotes([]);
+      return;
+    }
+
+    fetch(`/api/notes/${category}`)
+      .then(response => response.json())
+      .then(data => setNotes(data))
+      .catch(error => console.error(error));
+  }, [category]);
+
   return (
     <div className="wrapper wrapper-inline-block">
       {!isSidebarCollapsed && (
@@ -35,7 +48,7 @@ const App = () => {
           </div>
 
           <div style={{ display: "flex", justifyContent: "space-between", height: "38px" }}>
-            <h4>projects</h4>
+            <h4>{category}</h4>
             <h5
               id="btn-collapse-sidbar"
               className="btn-collapse-index"
@@ -45,19 +58,11 @@ const App = () => {
             </h5>
           </div>
 
-          <p>
-            <a className="subject" href="#simple-ai-chat">simple ai - chat</a>
-          </p>
-          <p>
-            <a className="subject" href="#vscode-window-color-rotator">vscode window color rotator</a>
-          </p>
-          <p>
-            <a className="subject" href="#timeline">timeline</a>
-          </p>
-          <div>
-            <a className="subject" href="#plain-text-note">notes</a>
-            <div className="tab subject">unix note</div>
-          </div>
+          {notes.map(note => (
+            <p key={note}>
+              <a className="subject" href={`#note`}>{note}</a>
+            </p>
+          ))}
 
           <h4>links</h4>
           <p>
@@ -72,7 +77,7 @@ const App = () => {
         style={isSidebarCollapsed ? { width: "100%", marginLeft: "0px" } : undefined}
       >
         <div className="content-view" id="main-view">
-          <Content category={category} />
+          <Content category={category} notes_={notes} />
         </div>
 
         <div style={{ height: "40px" }} />
