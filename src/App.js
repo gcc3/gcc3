@@ -46,14 +46,11 @@ const App = () => {
       {
         contentView === "projects" &&
         <div>
-          <ReactMarkdown>
-            *Welcome to [join](https://github.com/gcc3) any of the projects.*
-          </ReactMarkdown>
           <div id="simple-ai-chat">
-            {simpleAiChat && <ReactMarkdown children={`${simpleAiChat}`} />}
+            {simpleAiChat && <ReactMarkdown children={`${simpleAiChat}`} rehypePlugins={[rehypeRaw]} />}
           </div>
           <div id="vscode-window-color-rotator">
-            {vscodeWindowColorRotator && <ReactMarkdown children={`${vscodeWindowColorRotator}`} />}
+            {vscodeWindowColorRotator && <ReactMarkdown children={`${vscodeWindowColorRotator}`} rehypePlugins={[rehypeRaw]} />}
           </div>
           <div id="timeline">
             {timeline && <ReactMarkdown children={`${timeline}`} rehypePlugins={[rehypeRaw]} />}

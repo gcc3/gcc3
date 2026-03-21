@@ -2,6 +2,9 @@
 window color rotator
 ====================
 
+
+<img src="/assets/window-color-rotator/icon.png" alt="Window Color Rotator Icon" width="100px" />
+
 VS Code Extension to colorize the window for different projects.  
 
 Marketplace: [gcc3.window-color-rotator](https://marketplace.visualstudio.com/items?itemName=gcc3.window-color-rotator)  
