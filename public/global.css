@@ -1,12 +1,15 @@
 @import url(https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css);
 
 :root {
-  --sidebar-width: 200px;
+  --sidebar-width: 220px;
 }
 
 body {
   font-family: "Fira Code VF", Helvetica, sans-serif;
   margin: 10px 10px 20px 10px;
+  overscroll-behavior-y: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 a {
@@ -23,6 +26,30 @@ ol {
 
 html {
   scroll-behavior: smooth;
+  overscroll-behavior-y: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+h2,
+h3 {
+  font-size: medium;
+}
+
+.content-view,
+.content-view p,
+.content-view li,
+.content-view a {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 p > code,

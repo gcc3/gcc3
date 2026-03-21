@@ -16,9 +16,34 @@
   height: 38px;
 }
 
-.collapseBtn {
+.collapseButton {
   width: 25px;
   cursor: pointer;
+}
+
+.search {
+  margin-top: 4px;
+  margin-bottom: 10px;
+  padding-right: 10px;
+}
+
+.searchInput {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid black;
+  padding: 6px 8px;
+  font-size: 12px;
+  caret-color: black;
+}
+
+.searchInput::placeholder {
+  color: gray;
+}
+
+.searchInput:focus,
+.searchInput:focus-visible {
+  outline: none;
+  box-shadow: none;
 }
 
 .sidebar {
@@ -26,6 +51,15 @@
   height: 100%;
   position: fixed;
   border-right: 1px solid gray;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior-y: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none;
 }
 
 .tab {
@@ -36,4 +70,8 @@
   margin-top: 6px;
   text-decoration: underline !important;
   cursor: pointer;
+}
+
+.links {
+  padding-bottom: 16px;
 }

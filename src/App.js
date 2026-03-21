@@ -11,6 +11,7 @@ const App = () => {
   const [category, setCategory] = useState("");
   const [categories, setCategories] = useState([]);
   const [notes, setNotes] = useState([]);
+  const [categoryNotes, setCategoryNotes] = useState({});
 
   useEffect(() => {
     document.title = SITE_NAME;
@@ -28,6 +29,19 @@ const App = () => {
     }
 
     setCategory(firstCategory);
+
+    Promise.all(
+      categories.map(cat =>
+        fetch(`/api/notes/${cat}`)
+          .then(response => response.json())
+          .then(data => ({ cat, data }))
+          .catch(() => ({ cat, data: [] }))
+      )
+    ).then(results => {
+      const map = {};
+      results.forEach(({ cat, data }) => { map[cat] = data; });
+      setCategoryNotes(map);
+    });
   }, [categories]);
 
   useEffect(() => {
@@ -46,8 +60,8 @@ const App = () => {
     <div className={clsx(styles.wrapper, styles.wrapperInlineBlock)}>
       {!isSidebarCollapsed && (
         <Sidebar
-          category={category}
-          notes={notes}
+          categories={categories}
+          categoryNotes={categoryNotes}
           onCollapse={() => setIsSidebarCollapsed(true)}
         />
       )}
@@ -62,8 +76,7 @@ const App = () => {
 
         {isSidebarCollapsed && (
           <div
-            id="btn-expand-sidbar"
-            className={styles.expandSidebarBtn}
+            className={styles.expandSidebarButton}
             onClick={() => setIsSidebarCollapsed(false)}
           >
             •
