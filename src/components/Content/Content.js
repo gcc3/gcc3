@@ -2,6 +2,26 @@ import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 
+const getNoteId = noteName => {
+  if (noteName.includes("simple-ai-chat")) {
+    return "simple-ai-chat";
+  }
+
+  if (noteName.includes("window-color-rotator")) {
+    return "vscode-window-color-rotator";
+  }
+
+  if (noteName.includes("timeline")) {
+    return "timeline";
+  }
+
+  if (noteName.includes("note")) {
+    return "plain-text-note";
+  }
+
+  return noteName;
+};
+
 const Content = () => {
   const [category, setCategory] = useState("");
   const [categories, setCategories] = useState([]);
@@ -46,7 +66,7 @@ const Content = () => {
     <>
       <ReactMarkdown>{category}</ReactMarkdown>
       {notes.map(note => (
-        <div id={note.name} key={note.name}>
+        <div id={getNoteId(note.name)} key={note.name}>
           <ReactMarkdown children={note.content} rehypePlugins={[rehypeRaw]} />
         </div>
       ))}

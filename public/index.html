@@ -7,96 +7,10 @@
     <link rel="stylesheet" href="global.css" />
 
     <title>GCC³</title>
-    <script>
-      function redirectTo(viewName) {
-        // Hide all content views
-        [...document.getElementsByClassName("content-view")].forEach((view) => {
-          view.style.display = "none";
-        });
-        document.getElementById("main-view").style.display = "block";
-
-        // Dispatch a view update event
-        var event = new CustomEvent("changeContentView", { detail: viewName });
-        window.dispatchEvent(event);
-      }
-
-      function collapseSidebar(in_ = true) {
-        if (in_) {
-          document.getElementById("btn-collapse-sidbar").style.display = "none";
-          document.getElementById("btn-expand-sidbar").style.display = "block";
-          document.getElementById("btn-expand-sidbar").style.position = "fixed";
-          document.getElementById("btn-expand-sidbar").style.bottom = "10px";
-          document.querySelector(".sidebar").style.display = "none";
-          document.querySelector(".content").style.width = "100%";
-          document.querySelector(".content").style.marginLeft = "0px";
-        } else {
-          document.getElementById("btn-collapse-sidbar").style.display = "block";
-          document.getElementById("btn-expand-sidbar").style.display = "none";
-          document.querySelector(".sidebar").style.display = "inline-block";
-          document.querySelector(".content").style.width = "calc(100% - var(--index-width) - 13px)";
-          document.querySelector(".content").style.marginLeft = "calc(var(--index-width) + 13px)";
-        }
-      }
-    </script>
   </head>
 
   <body>
-    <div class="wrapper wrapper-inline-block">
-      <!-- Sidebar -->
-      <div class="sidebar">
-        <!-- Title -->
-        <div class="title">
-          <a href="https://www.gcc3.com" style="text-decoration: none">
-            <h1 style="display: inline">GCC</h1>
-            <div style="display: inline; vertical-align: top">3</div>
-            <div id="label-lab">lab</div>
-          </a>
-        </div>
-
-        <!-- Index -->
-        <div style="display: flex; justify-content: space-between; height: 38px">
-          <h4>projects</h4>
-          <h5 id="btn-collapse-sidbar" class="btn-collapse-index" onclick="collapseSidebar()"><<</h5>
-        </div>
-        <p>
-          <a class="subject" href="#simple-ai-chat" onclick="redirectTo('projects')">simple ai - chat</a>
-        </p>
-        <p>
-          <a class="subject" href="#vscode-window-color-rotator" onclick="redirectTo('projects')">vscode window color rotator</a>
-        </p>
-        <p>
-          <a class="subject" href="#timeline" onclick="redirectTo('projects')">timeline</a>
-        </p>
-        <div>
-          <a class="subject" href="#plain-text-note" onclick="redirectTo('projects')">notes</a>
-          <div class="tab subject" onclick="redirectTo('note')">unix note</div>
-        </div>
-
-        <!-- Links -->
-        <h4>links</h4>
-        <p>
-          <a href="https://github.com/gcc3"> GitHub </a>
-        </p>
-        <a href="https://twitter.com/318yang">@318yang</a>
-      </div>
-
-      <!-- Contents -->
-      <!-- rendered in `main.js` -->
-      <div class="content">
-        <div class="content-view" id="main-view">
-          <div id="root"></div>
-          <script src="./main.js"></script>
-        </div>
-        <div style="height: 40px"></div>
-        <div
-          id="btn-expand-sidbar"
-          class="btn-collapse-index"
-          style="display: none; font-size: 20px; text-align: center"
-          onclick="collapseSidebar(false)"
-        >
-          •
-        </div>
-      </div>
-    </div>
+    <div id="root"></div>
+    <script src="./main.js"></script>
   </body>
 </html>
