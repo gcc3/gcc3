@@ -1,10 +1,11 @@
 import React from "react";
+import styles from "./copyright.module.css";
 
 const Copyright = () => {
   const year = new Date().getFullYear();
 
   return (
-    <div style={{ marginTop: "32px", color: "gray", fontSize: "12px" }}>
+    <div className={styles.copyright}>
       © {year} gcc3.com
     </div>
   );

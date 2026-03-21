@@ -56,8 +56,6 @@ const App = () => {
           <Copyright />
         </div>
 
-        <div style={{ height: "40px" }} />
-
         {isSidebarCollapsed && (
           <div
             id="btn-expand-sidbar"

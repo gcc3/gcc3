@@ -75,6 +75,27 @@ module.exports = {
          */
         rules: [
             {
+                test: /\.module\.css$/,
+                use: [
+                    'style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            esModule: true,
+                            modules: {
+                                namedExport: false,
+                                exportLocalsConvention: 'as-is',
+                            },
+                        },
+                    },
+                ],
+            },
+            {
+                test: /\.css$/,
+                exclude: /\.module\.css$/,
+                use: ['style-loader', 'css-loader'],
+            },
+            {
                 test: /\.(js|jsx)$/,    //kind of file extension this rule should look for and apply in test
                 exclude: /node_modules/, //folder to be excluded
                 use: 'babel-loader' //loader which we are going to use

@@ -1,17 +1,18 @@
 import React from "react";
+import styles from "./sidebar.module.css";
 
 const Sidebar = ({ category, notes, onCollapse }) => {
   return (
     <div className="sidebar">
       <div className="title">
-        <a href="https://www.gcc3.com" style={{ textDecoration: "none" }}>
-          <h1 style={{ display: "inline" }}>GCC</h1>
-          <div style={{ display: "inline", verticalAlign: "top" }}>3</div>
+        <a href="https://www.gcc3.com" className={styles.linkReset}>
+          <h1 className={styles.brandMain}>GCC</h1>
+          <div className={styles.brandSup}>3</div>
           <div id="label-lab">lab</div>
         </a>
       </div>
 
-      <div style={{ display: "flex", justifyContent: "space-between", height: "38px" }}>
+      <div className={styles.categoryRow}>
         <h4>{category}</h4>
         <h5
           id="btn-collapse-sidbar"

@@ -1,0 +1,18 @@
+.linkReset {
+  text-decoration: none;
+}
+
+.brandMain {
+  display: inline;
+}
+
+.brandSup {
+  display: inline;
+  vertical-align: top;
+}
+
+.categoryRow {
+  display: flex;
+  justify-content: space-between;
+  height: 38px;
+}
