@@ -19,7 +19,7 @@ app.get('/api/categories', (req, res) => {
       return res.status(500).json({ error: 'Failed to read notes directory' });
     }
     const directories = entries
-      .filter((entry) => entry.isDirectory())
+      .filter((entry) => entry.isDirectory() && !entry.name.startsWith('.'))
       .map((entry) => entry.name);
 
     res.json(directories);
