@@ -26,6 +26,14 @@
   height: 100%;
   position: fixed;
   border-right: 1px solid gray;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none;
 }
 
 .tab {
@@ -36,4 +44,8 @@
   margin-top: 6px;
   text-decoration: underline !important;
   cursor: pointer;
+}
+
+.links {
+  padding-bottom: 16px;
 }
