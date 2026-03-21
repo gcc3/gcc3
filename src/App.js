@@ -3,43 +3,14 @@ import ReactMarkdown from "react-markdown";
 import rehypeRaw from 'rehype-raw'
 
 const App = () => {
-  const [contentView, setContentView] = useState("projects");
-  const [timeline, setTimeline] = useState();
-  const [simpleAiChat, setSimpleAiChat] = useState();
-  const [plainTextNote, setPlainTextNote] = useState();
-  const [unixNote, setUnixNote] = useState();
-  const [vscodeWindowColorRotator, setVscodeWindowColorRotator] = useState();
-  const [noteList, setNoteList] = useState([]);
+  const [category, setCategory] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [notes, setNotes] = useState([]);
 
   useEffect(() => {
-    fetch('/api/notes')
+    fetch('/api/categories')
       .then(response => response.json())
-      .then(data => setNoteList(data))
-      .catch(error => console.error(error));
-
-    fetch('/notes/projects/timeline.md')
-      .then(response => response.text())
-      .then(data => setTimeline(data))
-      .catch(error => console.error(error));
-
-    fetch('/notes/projects/simple ai - chat.md')
-      .then(response => response.text())
-      .then(data => setSimpleAiChat(data))
-      .catch(error => console.error(error));
-
-    fetch('/notes/projects/notes (plain text).md')
-      .then(response => response.text())
-      .then(data => setPlainTextNote(data))
-      .catch(error => console.error(error));
-
-    fetch('/notes/note/.markdown/Unix Note.md')
-      .then(response => response.text())
-      .then(data => setUnixNote(data))
-      .catch(error => console.error(error));
-
-    fetch('/notes/projects/window color rotator.md')
-      .then(response => response.text())
-      .then(data => setVscodeWindowColorRotator(data))
+      .then(data => setCategories(data))
       .catch(error => console.error(error));
 
     window.addEventListener('changeContentView', (e) => {
@@ -47,35 +18,45 @@ const App = () => {
     });
   }, []);
 
+  useEffect(() => {
+    const firstCategory = categories[0];
+    if (firstCategory) {
+      setCategory(firstCategory);
+
+      // Fetch notes
+      fetch(`/api/notes/${firstCategory}`)
+        .then(response => response.json())
+        .then(data => {
+          Promise.all(data.map(async note => {
+            try {
+              const response = await fetch(`/notes/${firstCategory}/${note}`);
+              const content = await response.text();
+              return ({ name: note, content });
+            } catch (error) {
+              console.error(`Failed to fetch note ${note}:`, error);
+              return null;
+            }
+          }))
+            .then(results => {
+              const validResults = results.filter(result => result !== null);
+              setNotes(validResults);
+            });
+        })
+        .catch(error => console.error(error));
+    }
+  }, [categories]);
+
   return (
-    <>
-      {
-        contentView === "projects" &&
-        <div>
-          <ReactMarkdown>
-            **projects**
-          </ReactMarkdown>
-          <div id="simple-ai-chat">
-            {simpleAiChat && <ReactMarkdown children={`${simpleAiChat}`} rehypePlugins={[rehypeRaw]} />}
-          </div>
-          <div id="vscode-window-color-rotator">
-            {vscodeWindowColorRotator && <ReactMarkdown children={`${vscodeWindowColorRotator}`} rehypePlugins={[rehypeRaw]} />}
-          </div>
-          <div id="timeline">
-            {timeline && <ReactMarkdown children={`${timeline}`} rehypePlugins={[rehypeRaw]} />}
-          </div>
-          <div id="plain-text-note">
-            {plainTextNote && <ReactMarkdown children={`${plainTextNote}`} />}
-          </div>
+    <div>
+      <ReactMarkdown>
+        {category}
+      </ReactMarkdown>
+      {notes.map(note => (
+        <div id={note.name} key={note.name}>
+          <ReactMarkdown children={note.content} rehypePlugins={[rehypeRaw]} />
         </div>
-      }
-      {
-        contentView === "notes" &&
-        <div>
-          {unixNote && <ReactMarkdown children={`${unixNote}`} />}
-        </div>
-      }
-    </>
+      ))}
+    </div>
   )
 }
 
