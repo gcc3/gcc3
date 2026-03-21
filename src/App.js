@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Content from "./components/Content/Content";
 import Sidebar from "./components/Sidebar/Sidebar";
+import Copyright from "./components/Copyright/Copyright";
 
 const App = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -52,6 +53,7 @@ const App = () => {
       >
         <div className="content-view" id="main-view">
           <Content category={category} notes_={notes} />
+          <Copyright />
         </div>
 
         <div style={{ height: "40px" }} />
