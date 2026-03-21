@@ -76,8 +76,7 @@ const App = () => {
 
         {isSidebarCollapsed && (
           <div
-            id="btn-expand-sidbar"
-            className={styles.expandSidebarBtn}
+            className={styles.expandSidebarButton}
             onClick={() => setIsSidebarCollapsed(false)}
           >
             •
