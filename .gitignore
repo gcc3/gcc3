@@ -1,7 +1,6 @@
 node_modules/
 public/main.js
-public/projects/note/
-public/downloads/
+public/note/*
 .DS_Store
 *.log
 .idea
