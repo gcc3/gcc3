@@ -19,6 +19,9 @@ app.use((req, res, next) => {
   return next();
 });
 
+// Serve static files
+app.use('/notes', express.static(path.join(__dirname, '../public/notes')));
+
 // Ping
 app.get('/', (req, res) => {
   res.send('dead');
