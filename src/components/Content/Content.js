@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
+import { toNoteId } from "../../utils/textUtils";
+
+const NOTES_LIMIT = 10;
 
 const Content = ({ category, notes_ }) => {
   const [notes, setNotes] = useState([]);
@@ -11,6 +14,7 @@ const Content = ({ category, notes_ }) => {
       return;
     }
 
+    notes_ = notes_.slice(0, NOTES_LIMIT);
     Promise.all(notes_.map(async note_ => {
       try {
         const response = await fetch(`/notes/${category}/${note_}`);
@@ -32,7 +36,7 @@ const Content = ({ category, notes_ }) => {
     <>
       <ReactMarkdown>{`**${category}**`}</ReactMarkdown>
       {notes.map(note => (
-        <div id={note.name} key={note.name}>
+        <div id={toNoteId(category, note.name)} key={note.name}>
           <ReactMarkdown children={note.content} rehypePlugins={[rehypeRaw]} />
         </div>
       ))}

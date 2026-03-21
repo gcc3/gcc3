@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./sidebar.module.css";
 import { SITE_NAME, SITE_PUBLIC_URL } from "../../constants";
+import { toNoteId, toNoteTitle } from "../../utils/textUtils";
 
 const Sidebar = ({ categories = [], categoryNotes = {}, onCollapse }) => {
   return (
@@ -27,7 +28,7 @@ const Sidebar = ({ categories = [], categoryNotes = {}, onCollapse }) => {
           <h4>{cat}</h4>
           {(categoryNotes[cat] || []).map(note => (
             <p key={note}>
-              <a className={styles.subject} href={`#${note}`}>{note.replace('.md', '').replace(/^\d+_/, '')}</a>
+              <a className={styles.subject} href={`#${toNoteId(cat, note)}`}>{toNoteTitle(note)}</a>
             </p>
           ))}
         </div>
