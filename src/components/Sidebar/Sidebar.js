@@ -24,7 +24,7 @@ const Sidebar = ({ category, notes, onCollapse }) => {
 
       {notes.map(note => (
         <p key={note}>
-          <a className="subject" href="#note">{note}</a>
+          <a className="subject" href={`#${note}`}>{note}</a>
         </p>
       ))}
 
