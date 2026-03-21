@@ -1,8 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Content from "./components/Content/Content";
 
 const App = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [category, setCategory] = useState("");
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/categories")
+      .then(response => response.json())
+      .then(data => setCategories(data))
+      .catch(error => console.error(error));
+  }, []);
+
+  useEffect(() => {
+    const firstCategory = categories[0];
+    if (!firstCategory) {
+      return;
+    }
+
+    setCategory(firstCategory);
+  }, [categories]);
 
   return (
     <div className="wrapper wrapper-inline-block">
@@ -54,7 +72,7 @@ const App = () => {
         style={isSidebarCollapsed ? { width: "100%", marginLeft: "0px" } : undefined}
       >
         <div className="content-view" id="main-view">
-          <Content />
+          <Content category={category} />
         </div>
 
         <div style={{ height: "40px" }} />

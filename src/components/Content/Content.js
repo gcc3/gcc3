@@ -22,31 +22,19 @@ const getNoteId = noteName => {
   return noteName;
 };
 
-const Content = () => {
-  const [category, setCategory] = useState("");
-  const [categories, setCategories] = useState([]);
+const Content = ({ category }) => {
   const [notes, setNotes] = useState([]);
 
   useEffect(() => {
-    fetch("/api/categories")
-      .then(response => response.json())
-      .then(data => setCategories(data))
-      .catch(error => console.error(error));
-  }, []);
-
-  useEffect(() => {
-    const firstCategory = categories[0];
-    if (!firstCategory) {
+    if (!category) {
       return;
     }
 
-    setCategory(firstCategory);
-
-    fetch(`/api/notes/${firstCategory}`)
+    fetch(`/api/notes/${category}`)
       .then(response => response.json())
       .then(data => Promise.all(data.map(async note => {
         try {
-          const response = await fetch(`/notes/${firstCategory}/${note}`);
+          const response = await fetch(`/notes/${category}/${note}`);
           const content = await response.text();
 
           return { name: note, content };
@@ -60,7 +48,7 @@ const Content = () => {
         setNotes(validResults);
       })
       .catch(error => console.error(error));
-  }, [categories]);
+  }, [category]);
 
   return (
     <>
