@@ -36,7 +36,7 @@ const Content = ({ category, notes_ }) => {
 
   return (
     <>
-      <Markdown>{`**${category}**`}</Markdown>
+      {category ? <Markdown>{`**${category}**`}</Markdown> : null}
       {loading ? (
         <h5 style={{ fontWeight: "normal" }}>Loading...</h5>
       ) : (
