@@ -20,10 +20,10 @@ Serve
 Build the project for production:  
 `npm run build`  
 This generates the bundled `main.js` file in the `public/` directory.  
-Serve the `public/` directory with a static file server.  
-
 Serve the project with Express:  
 `npm start`  
+
+The frontend and API are served from the same Express server and port.  
 
 Content  
 Simply write and put the markdown files in the `notes/[category]/*.md` directory.  
@@ -43,4 +43,4 @@ Develop the project with hot reload:
 `npm run dev`
 
 This will start the webpack dev server at http://localhost:9500/
-The content server PORT can be set in `.env` file.  
+The content server `PORT` can be set in `.env` file.  

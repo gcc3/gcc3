@@ -3,7 +3,6 @@ import ReactMarkdown from "react-markdown";
 import Markdown from "../../ui/Markdown";
 import { toNoteId } from "../../utils/textUtils";
 
-const BASE_URL = process.env.REACT_APP_BASE_URL || "";
 const NOTES_LIMIT = 10;
 
 const Content = ({ category, notes_ }) => {
@@ -18,7 +17,7 @@ const Content = ({ category, notes_ }) => {
     notes_ = notes_.slice(0, NOTES_LIMIT);
     Promise.all(notes_.map(async note_ => {
       try {
-        const response = await fetch(`${BASE_URL}/notes/${category}/${note_}`);
+        const response = await fetch(`/notes/${category}/${note_}`);
         const content = await response.text();
 
         return { name: note_, content };

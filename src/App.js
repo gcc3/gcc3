@@ -6,8 +6,6 @@ import Copyright from "./components/Copyright/Copyright";
 import { SITE_NAME } from "./constants";
 import styles from "./app.module.css";
 
-const BASE_URL = process.env.REACT_APP_BASE_URL || "";
-
 const App = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [category, setCategory] = useState("");
@@ -18,7 +16,7 @@ const App = () => {
   useEffect(() => {
     document.title = SITE_NAME;
 
-    fetch(`${BASE_URL}/api/categories`)
+    fetch("/api/categories")
       .then(response => response.json())
       .then(data => setCategories(data))
       .catch(error => console.error(error));
@@ -34,7 +32,7 @@ const App = () => {
 
     Promise.all(
       categories.map(cat =>
-        fetch(`${BASE_URL}/api/notes/${cat}`)
+        fetch(`/api/notes/${cat}`)
           .then(response => response.json())
           .then(data => ({ cat, data }))
           .catch(() => ({ cat, data: [] }))
@@ -52,7 +50,7 @@ const App = () => {
       return;
     }
 
-    fetch(`${BASE_URL}/api/notes/${category}`)
+    fetch(`/api/notes/${category}`)
       .then(response => response.json())
       .then(data => setNotes(data))
       .catch(error => console.error(error));

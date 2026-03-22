@@ -1,5 +1,4 @@
 const path = require("path");
-const webpack = require("webpack");
 const dotenv = require("dotenv");
 
 dotenv.config({ path: path.resolve(__dirname, ".env") });
@@ -65,11 +64,6 @@ module.exports = (_, argv = {}) => {
                 }
             ]
         },
-        plugins: [
-            new webpack.DefinePlugin({
-                "process.env.REACT_APP_BASE_URL": JSON.stringify(process.env.REACT_APP_BASE_URL || ""),
-            }),
-        ],
         resolve: {
             /** "extensions" 
              * If multiple files share the same name but have different extensions, webpack will 

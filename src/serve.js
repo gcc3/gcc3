@@ -6,6 +6,8 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 const corsOrigin = process.env.CORS_ORIGIN || '*';
+const publicDir = path.join(__dirname, '../public');
+const notesDir = path.join(publicDir, 'notes');
 
 // CORS middleware
 app.use((req, res, next) => {
@@ -19,17 +21,15 @@ app.use((req, res, next) => {
   return next();
 });
 
-// Serve static files
-app.use('/notes', express.static(path.join(__dirname, '../public/notes')));
+// Serve the built frontend and static note files from the same server.
+app.use(express.static(publicDir));
 
-// Ping
 app.get('/', (req, res) => {
-  res.send('dead');
+  res.sendFile(path.join(publicDir, 'index.html'));
 })
 
 // List categories
 app.get('/api/categories', (req, res) => {
-  const notesDir = path.join(__dirname, '../public/notes');
   fs.readdir(notesDir, { withFileTypes: true }, (err, entries) => {
     if (err) {
       return res.status(500).json({ error: 'Failed to read notes directory' });
@@ -44,7 +44,6 @@ app.get('/api/categories', (req, res) => {
 
 // List notes
 app.get('/api/notes/:category_name', (req, res) => {
-  const notesDir = path.join(__dirname, '../public/notes');
   const categoryName = req.params.category_name;
   const categoryDir = path.resolve(notesDir, categoryName);
   const markdownDir = path.join(categoryDir, '.markdown');
