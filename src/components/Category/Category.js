@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Markdown from "../../ui/Markdown";
-import { toCategoryTitle, toNoteId } from "../../utils/textUtils";
+import Markdown from "@ui/Markdown";
+import { toCategoryTitle, toNoteId } from "@utils/textUtils";
 
 const NOTES_LIMIT = 30;
 

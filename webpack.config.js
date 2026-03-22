@@ -75,7 +75,12 @@ module.exports = (_, argv = {}) => {
              * resolve the one with the extension listed first in the array and skip the rest. 
              * This is what enables users to leave off the extension when importing
              */
-            extensions: ['.js', '.jsx', '.json']
+            extensions: ['.js', '.jsx', '.json'],
+            alias: {
+                '@components': path.resolve(__dirname, 'src/components'),
+                '@ui': path.resolve(__dirname, 'src/ui'),
+                '@utils': path.resolve(__dirname, 'src/utils'),
+            }
         },
         plugins: [
             new webpack.DefinePlugin({
