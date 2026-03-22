@@ -2,6 +2,7 @@ require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
+const { noteListing } = require('./utils/noteUtils');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -37,49 +38,29 @@ app.get('/api/categories', (req, res) => {
     const directories = entries
       .filter((entry) => entry.isDirectory() && !entry.name.startsWith('.'))
       .map((entry) => entry.name);
-
     res.json(directories);
   });
 })
 
 // List notes
+// The notes folder structure can be either:
+// note/Note.md
+// note/Note.txt, note/.markdown/Note.md, .md build from .txt
 app.get('/api/notes/:category', (req, res) => {
   const category = req.params.category;
   const categoryDir = path.resolve(notesDir, category);
   const markdownDir = path.join(categoryDir, '.markdown');
-
   if (!categoryDir.startsWith(notesDir)) {
     return res.status(400).json({ error: 'Invalid category name' });
   }
 
-  fs.readdir(markdownDir, { withFileTypes: true }, (markdownErr, markdownEntries) => {
-    if (!markdownErr) {
-      const markdownFiles = markdownEntries
-        .filter((entry) => entry.isFile() && path.extname(entry.name).toLowerCase() === '.md')
-        .map((entry) => path.posix.join('.markdown', entry.name))
-        .sort((a, b) => a.localeCompare(b));
-      return res.json(markdownFiles);
-    }
-
-    if (markdownErr.code !== 'ENOENT') {
-      return res.status(500).json({ error: 'Failed to read .markdown directory' });
-    }
-
-    fs.readdir(categoryDir, { withFileTypes: true }, (err, entries) => {
-      if (err) {
-        if (err.code === 'ENOENT') {
-          return res.status(404).json({ error: 'Category not found' });
-        }
-        return res.status(500).json({ error: 'Failed to read category directory' });
-      }
-      const files = entries
-        .filter((entry) => entry.isFile() && path.extname(entry.name).toLowerCase() === '.md')
-        .map((entry) => entry.name)
-        .sort((a, b) => a.localeCompare(b));
-      res.json(files);
-    });
-  });
-})
+  const isDotMarkdownExists = fs.existsSync(markdownDir) && fs.statSync(markdownDir).isDirectory();
+  if (isDotMarkdownExists) {
+    return res.json(noteListing(markdownDir));
+  } else {
+    return res.json(noteListing(categoryDir));
+  }
+});
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`)
