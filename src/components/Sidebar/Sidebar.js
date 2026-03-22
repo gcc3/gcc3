@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import styles from "./sidebar.module.css";
 import { toNoteId, toNoteTitle, toCategoryTitle } from "../../utils/textUtils";
+import { clearHash } from "@utils/hashUtils";
 
 const siteName = process.env.REACT_APP_NAME || "";
 const sitePublicUrl = process.env.REACT_APP_PUBLIC_URL || "#";
@@ -14,6 +15,21 @@ const handleSearchKeyDown = (event, searchText, setSearchText) => {
   if (event.key === "Escape" && searchText) {
     setSearchText("");
   }
+};
+
+const handleNoteSubjectClick = (category, note, onNoteClick) => {
+  const noteId = toNoteId(category, note);
+
+  window.setTimeout(() => {
+    if (window.location.hash.includes(noteId)) {
+      onNoteClick?.(category, note);
+    }
+  }, 0);
+};
+
+const handleCategoryTitleClick = (category, onCategoryClick) => {
+  clearHash();
+  onCategoryClick?.(category);
 };
 
 const Sidebar = ({
@@ -82,14 +98,19 @@ const Sidebar = ({
       {categories.map(cat => (
         <div key={cat}>
           {(filteredCategoryNoteList[cat] || []).length > 0 && (
-            <h4 className={styles.categoryName} onClick={() => onCategoryClick?.(cat)}>{toCategoryTitle(cat)}</h4>
+            <h4
+              className={styles.categoryName}
+              onClick={() => handleCategoryTitleClick(cat, onCategoryClick)}
+            >
+              {toCategoryTitle(cat)}
+            </h4>
           )}
           {(filteredCategoryNoteList[cat] || []).map(note => (
             <p key={note}>
               <a
                 className={styles.subject}
                 href={`#${toNoteId(cat, note)}`}
-                onClick={() => onNoteClick?.(cat, note)}
+                onClick={() => handleNoteSubjectClick(cat, note, onNoteClick)}
               >
                 {toNoteTitle(note)}
               </a>

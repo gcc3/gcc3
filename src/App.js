@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 import { Category, Note, Sidebar, Copyright } from "./components";
 import styles from "./app.module.css";
+import { clearHash } from "@utils/hashUtils";
 
 const siteName = process.env.REACT_APP_NAME || "";
 
@@ -17,8 +18,10 @@ const App = () => {
   // Content
   const [notes, setNotes] = useState([]);
 
+  // Initialize
   useEffect(() => {
     document.title = siteName;
+    clearHash();
 
     // I. Load categories
     fetch("/api/categories")
