@@ -45,9 +45,13 @@ const Sidebar = ({
     }
   };
 
-  const handleCategoryTitleClick = (category) => {
+  const handleCategoryClick = (category) => {
     clearHash();
     onCategoryClick?.(category);
+  };
+
+  const handleNoteClick = (category, note) => {
+    onNoteClick?.(category, note);
   };
 
   return (
@@ -91,7 +95,7 @@ const Sidebar = ({
             {(filteredCategoryNoteList[category] || []).length > 0 && (
               <div
                 className={styles.categoryName}
-                onClick={() => handleCategoryTitleClick(category)}
+                onClick={() => handleCategoryClick(category)}
               >
                 {toCategoryTitle(category)}
               </div>
@@ -101,7 +105,7 @@ const Sidebar = ({
                 <a
                   className={styles.note}
                   href={`#${toNoteId(category, note)}`}
-                  onClick={() => onNoteClick?.(category, note)}
+                  onClick={() => handleNoteClick(category, note)}
                 >
                   {toNoteTitle(note)}
                 </a>
