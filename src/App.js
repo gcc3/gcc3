@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import clsx from "clsx";
-import Content from "./components/Content/Content";
-import Sidebar from "./components/Sidebar/Sidebar";
-import Copyright from "./components/Copyright/Copyright";
+import { Category, Sidebar, Copyright } from "./components";
 import styles from "./app.module.css";
 
 const siteName = process.env.REACT_APP_NAME || "";
@@ -76,7 +74,7 @@ const App = () => {
         className={clsx(styles.content, { [styles.contentExpanded]: isSidebarCollapsed })}
       >
         <div className="content-view" id="main-view">
-          <Content category={category} notes_={notes} />
+          <Category category={category} notes_={notes} />
           <Copyright />
         </div>
 

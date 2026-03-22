@@ -4,7 +4,7 @@ import { toCategoryTitle, toNoteId } from "../../utils/textUtils";
 
 const NOTES_LIMIT = 30;
 
-const Content = ({ category, notes_ }) => {
+const Category = ({ category, notes_ }) => {
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -50,4 +50,4 @@ const Content = ({ category, notes_ }) => {
   );
 };
 
-export default Content;
+export default Category;
