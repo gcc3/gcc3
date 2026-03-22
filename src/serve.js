@@ -56,7 +56,7 @@ app.get('/api/notes/:category', (req, res) => {
 
   const isDotMarkdownExists = fs.existsSync(markdownDir) && fs.statSync(markdownDir).isDirectory();
   if (isDotMarkdownExists) {
-    return res.json(noteListing(markdownDir));
+    return res.json(noteListing(markdownDir).map(note => path.posix.join('.markdown', note)));
   } else {
     return res.json(noteListing(categoryDir));
   }
