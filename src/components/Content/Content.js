@@ -39,7 +39,7 @@ const Content = ({ category, notes_ }) => {
     <>
       <ReactMarkdown>{`**${category}**`}</ReactMarkdown>
       {loading ? (
-        <p>Loading...</p>
+        <h5 style={{ fontWeight: "normal" }}>Loading...</h5>
       ) : (
         notes.map(note => (
           <div id={toNoteId(category, note.name)} key={note.name}>
