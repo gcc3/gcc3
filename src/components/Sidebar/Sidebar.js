@@ -5,6 +5,10 @@ import { toNoteId, toNoteTitle } from "../../utils/textUtils";
 const siteName = process.env.REACT_APP_NAME || "";
 const sitePublicUrl = process.env.REACT_APP_PUBLIC_URL || "#";
 const useSearch = process.env.REACT_APP_USE_SEARCH === "true";
+const links = (process.env.REACT_APP_LINKS || "").split(";").map(link => {
+  const [name, url] = link.split("=").map(part => part.trim());
+  return { name, url };
+}).filter(link => link.name && link.url);
 
 const Sidebar = ({ categories = [], categoryNotes = {}, onCollapse }) => {
   const [searchText, setSearchText] = useState("");
@@ -76,12 +80,11 @@ const Sidebar = ({ categories = [], categoryNotes = {}, onCollapse }) => {
 
       <div className={styles.links}>
         <h5>links</h5>
-        <p>
-          <a href="https://github.com/gcc3"> GitHub </a>
-        </p>
-        <p>
-          <a href="https://twitter.com/318yang">@318yang</a>
-        </p>
+        {links.map(link => (
+          <p key={link.name}>
+            <a href={link.url}>{link.name}</a>
+          </p>
+        ))}
       </div>
     </div>
   );
