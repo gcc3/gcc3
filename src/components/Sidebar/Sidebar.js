@@ -111,15 +111,16 @@ const Sidebar = ({
         ))}
       </div>
 
-
-      <div className={styles.links}>
-        <h5>links</h5>
-        {links.map(link => (
-          <p key={link.name}>
-            <a href={link.url}>{link.name}</a>
-          </p>
-        ))}
-      </div>
+      {links && links.length > 0 && (
+        <div className={styles.links}>
+          <h5>links</h5>
+          {links.map(link => (
+            <p key={link.name}>
+              <a href={link.url}>{link.name}</a>
+            </p>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
