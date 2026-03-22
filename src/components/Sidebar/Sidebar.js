@@ -85,29 +85,32 @@ const Sidebar = ({
         )}
       </div>
 
-      {categories.map(cat => (
-        <div key={cat}>
-          {(filteredCategoryNoteList[cat] || []).length > 0 && (
-            <h4
-              className={styles.categoryName}
-              onClick={() => handleCategoryTitleClick(cat, onCategoryClick)}
-            >
-              {toCategoryTitle(cat)}
-            </h4>
-          )}
-          {(filteredCategoryNoteList[cat] || []).map(note => (
-            <p key={note}>
-              <a
-                className={styles.note}
-                href={`#${toNoteId(cat, note)}`}
-                onClick={() => onNoteClick?.(cat, note)}
+      <div className={styles.index}>
+        {categories.map(cat => (
+          <div className={styles.categories} key={cat}>
+            {(filteredCategoryNoteList[cat] || []).length > 0 && (
+              <div
+                className={styles.categoryName}
+                onClick={() => handleCategoryTitleClick(cat, onCategoryClick)}
               >
-                {toNoteTitle(note)}
-              </a>
-            </p>
-          ))}
-        </div>
-      ))}
+                {toCategoryTitle(cat)}
+              </div>
+            )}
+            {(filteredCategoryNoteList[cat] || []).map(note => (
+              <div key={note}>
+                <a
+                  className={styles.note}
+                  href={`#${toNoteId(cat, note)}`}
+                  onClick={() => onNoteClick?.(cat, note)}
+                >
+                  {toNoteTitle(note)}
+                </a>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+
 
       <div className={styles.links}>
         <h5>links</h5>

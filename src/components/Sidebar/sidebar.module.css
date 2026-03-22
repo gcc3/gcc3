@@ -73,7 +73,21 @@
   margin-left: 20px;
 }
 
+.index {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
 .categoryName {
+  font-weight: bold;
   cursor: pointer;
 }
 
