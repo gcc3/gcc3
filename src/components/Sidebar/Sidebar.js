@@ -99,29 +99,34 @@ const Sidebar = ({
 
       {hasFilteredNotes && (
         <div className={styles.index}>
-          {categories.map(category => (
-            <div className={styles.categories} key={category}>
-              {(filteredCategoryNoteList[category] || []).length > 0 && (
+          {categories.map(category => {
+            const notes = filteredCategoryNoteList[category] || [];
+            if (notes.length === 0) {
+              return null;
+            }
+
+            return (
+              <div className={styles.categories} key={category}>
                 <div
                   className={styles.category}
                   onClick={() => handleCategoryClick(category)}
                 >
                   {toCategoryTitle(category)}
                 </div>
-              )}
-              {(filteredCategoryNoteList[category] || []).map(note => (
-                <div key={note}>
-                  <a
-                    className={styles.note}
-                    href={`#${toNoteId(category, note)}`}
-                    onClick={() => handleNoteClick(category, note)}
-                  >
-                    {toNoteTitle(note)}
-                  </a>
-                </div>
-              ))}
-            </div>
-          ))}
+                {notes.map(note => (
+                  <div key={note}>
+                    <a
+                      className={styles.note}
+                      href={`#${toNoteId(category, note)}`}
+                      onClick={() => handleNoteClick(category, note)}
+                    >
+                      {toNoteTitle(note)}
+                    </a>
+                  </div>
+                ))}
+              </div>
+            );
+          })}
         </div>
       )}
 
