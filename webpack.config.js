@@ -65,6 +65,10 @@ module.exports = (_, argv = {}) => {
                 }
             ]
         },
+        externals: {
+            react: 'React',
+            'react-dom': 'ReactDOM',
+        },
         resolve: {
             /** "extensions" 
              * If multiple files share the same name but have different extensions, webpack will 
