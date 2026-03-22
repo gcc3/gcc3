@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack");
 const dotenv = require("dotenv");
 
 dotenv.config({ path: path.resolve(__dirname, ".env") });
@@ -72,6 +73,13 @@ module.exports = (_, argv = {}) => {
              */
             extensions: ['.js', '.jsx', '.json']
         },
+        plugins: [
+            new webpack.DefinePlugin({
+                'process.env.SITE_NAME': JSON.stringify(process.env.SITE_NAME || ''),
+                'process.env.SITE_PUBLIC_URL': JSON.stringify(process.env.SITE_PUBLIC_URL || ''),
+                'process.env.COPYRIGHT': JSON.stringify(process.env.COPYRIGHT || ''),
+            }),
+        ],
         module: {
             /** "rules"
              * This says - "Hey webpack compiler, when you come across a path that resolves to a '.js or .jsx' 

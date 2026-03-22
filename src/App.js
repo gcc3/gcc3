@@ -3,8 +3,9 @@ import clsx from "clsx";
 import Content from "./components/Content/Content";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Copyright from "./components/Copyright/Copyright";
-import { SITE_NAME } from "./constants";
 import styles from "./app.module.css";
+
+const siteName = process.env.SITE_NAME || "";
 
 const App = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -14,7 +15,7 @@ const App = () => {
   const [categoryNotes, setCategoryNotes] = useState({});
 
   useEffect(() => {
-    document.title = SITE_NAME;
+    document.title = siteName;
 
     fetch("/api/categories")
       .then(response => response.json())

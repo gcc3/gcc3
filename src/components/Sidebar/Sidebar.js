@@ -1,7 +1,9 @@
 import React, { useMemo, useState } from "react";
 import styles from "./sidebar.module.css";
-import { SITE_NAME, SITE_PUBLIC_URL } from "../../constants";
 import { toNoteId, toNoteTitle } from "../../utils/textUtils";
+
+const siteName = process.env.SITE_NAME || "";
+const sitePublicUrl = process.env.SITE_PUBLIC_URL || "#";
 
 const Sidebar = ({ categories = [], categoryNotes = {}, onCollapse }) => {
   const [searchText, setSearchText] = useState("");
@@ -30,8 +32,8 @@ const Sidebar = ({ categories = [], categoryNotes = {}, onCollapse }) => {
     <div className={styles.sidebar}>
       <div>
         <div className={styles.title}>
-          <a href={SITE_PUBLIC_URL} className={styles.linkReset}>
-            <h1 className={styles.brand}>{SITE_NAME}</h1>
+          <a href={sitePublicUrl} className={styles.linkReset}>
+            <h1 className={styles.brand}>{siteName}</h1>
           </a>
         </div>
 

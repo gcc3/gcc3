@@ -14,7 +14,7 @@ Setup
 `npm install`  
 Setup `.env` from `.env.example` and fill in the required values.  
 `PORT` is the content server port.  
-Setup `src/constants.js` from `src/constants.example.js` and fill in the required values.  
+`SITE_NAME`, `SITE_PUBLIC_URL`, and `COPYRIGHT` are used by the frontend pages.  
 
 Serve  
 Build the project for production:  
