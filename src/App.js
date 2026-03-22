@@ -11,12 +11,17 @@ const App = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [category, setCategory] = useState("");
   const [categories, setCategories] = useState([]);
+
+  // Sidebar
+  const [categoryNoteList, setCategoryNoteList] = useState({});
+
+  // Content
   const [notes, setNotes] = useState([]);
-  const [categoryNotes, setCategoryNotes] = useState({});
 
   useEffect(() => {
     document.title = siteName;
 
+    // I. Load categories
     fetch("/api/categories")
       .then(response => response.json())
       .then(data => setCategories(data))
@@ -24,13 +29,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    const firstCategory = categories[0];
-    if (!firstCategory) {
-      return;
-    }
-
-    setCategory(firstCategory);
-
+    // II. Load note list for each category
     Promise.all(
       categories.map(cat =>
         fetch(`/api/notes/${cat}`)
@@ -41,8 +40,13 @@ const App = () => {
     ).then(results => {
       const map = {};
       results.forEach(({ cat, data }) => { map[cat] = data; });
-      setCategoryNotes(map);
+      setCategoryNoteList(map);
     });
+
+    // III. Set initial category
+    if (categories.length > 0) {
+      setCategory(categories[0]);
+    }
   }, [categories]);
 
   useEffect(() => {
@@ -62,7 +66,7 @@ const App = () => {
       {!isSidebarCollapsed && (
         <Sidebar
           categories={categories}
-          categoryNotes={categoryNotes}
+          categoryNoteList={categoryNoteList}
           onCollapse={() => setIsSidebarCollapsed(true)}
         />
       )}

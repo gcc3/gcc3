@@ -10,18 +10,18 @@ const links = (process.env.REACT_APP_LINKS || "").split(";").map(link => {
   return { name, url };
 }).filter(link => link.name && link.url);
 
-const Sidebar = ({ categories = [], categoryNotes = {}, onCollapse }) => {
+const Sidebar = ({ categories = [], categoryNoteList = {}, onCollapse }) => {
   const [searchText, setSearchText] = useState("");
 
   const filteredCategoryNotes = useMemo(() => {
     const keyword = searchText.trim().toLowerCase();
 
     if (!keyword) {
-      return categoryNotes;
+      return categoryNoteList;
     }
 
     return categories.reduce((acc, cat) => {
-      const filteredNotes = (categoryNotes[cat] || []).filter(note =>
+      const filteredNotes = (categoryNoteList[cat] || []).filter(note =>
         toNoteTitle(note).toLowerCase().includes(keyword)
       );
 
@@ -31,7 +31,7 @@ const Sidebar = ({ categories = [], categoryNotes = {}, onCollapse }) => {
 
       return acc;
     }, {});
-  }, [categories, categoryNotes, searchText]);
+  }, [categories, categoryNoteList, searchText]);
 
   return (
     <div className={styles.sidebar}>
