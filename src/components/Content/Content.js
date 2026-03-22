@@ -7,6 +7,7 @@ const NOTES_LIMIT = 10;
 
 const Content = ({ category, notes_ }) => {
   const [notes, setNotes] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!category || !notes_?.length) {
@@ -14,6 +15,7 @@ const Content = ({ category, notes_ }) => {
       return;
     }
 
+    setLoading(true);
     notes_ = notes_.slice(0, NOTES_LIMIT);
     Promise.all(notes_.map(async note_ => {
       try {
@@ -29,17 +31,22 @@ const Content = ({ category, notes_ }) => {
       .then(results => {
         const validResults = results.filter(result => result !== null);
         setNotes(validResults);
-      });
+      })
+      .finally(() => setLoading(false));
   }, [category, notes_]);
 
   return (
     <>
       <ReactMarkdown>{`**${category}**`}</ReactMarkdown>
-      {notes.map(note => (
-        <div id={toNoteId(category, note.name)} key={note.name}>
-          <Markdown>{note.content}</Markdown>
-        </div>
-      ))}
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        notes.map(note => (
+          <div id={toNoteId(category, note.name)} key={note.name}>
+            <Markdown>{note.content}</Markdown>
+          </div>
+        ))
+      )}
     </>
   );
 };
