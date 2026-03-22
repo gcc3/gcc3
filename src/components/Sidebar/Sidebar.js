@@ -52,7 +52,7 @@ const Sidebar = ({
 
   return (
     <div className={styles.sidebar}>
-      <div>
+      <div className={styles.stickyTop}>
         <div className={styles.title}>
           <a href={sitePublicUrl} className={styles.linkReset}>
             <h1 className={styles.brand}>{siteName}</h1>
@@ -98,7 +98,7 @@ const Sidebar = ({
           {(filteredCategoryNoteList[cat] || []).map(note => (
             <p key={note}>
               <a
-                className={styles.subject}
+                className={styles.note}
                 href={`#${toNoteId(cat, note)}`}
                 onClick={() => onNoteClick?.(cat, note)}
               >
