@@ -21,7 +21,7 @@ const Content = ({ category, notes_ }) => {
         const response = await fetch(`/notes/${category}/${note_}`);
         const content = await response.text();
 
-        return { name: note_, content };
+        return { filename: note_, content };
       } catch (error) {
         console.error(`Failed to fetch note ${note_}:`, error);
         return null;
@@ -41,8 +41,8 @@ const Content = ({ category, notes_ }) => {
         <h5 style={{ fontWeight: "normal" }}>Loading...</h5>
       ) : (
         notes.map(note => (
-          <div id={toNoteId(category, note.name)} key={note.name}>
-            <Markdown>{note.content}</Markdown>
+          <div id={toNoteId(category, note.filename)} key={note.filename}>
+            <Markdown basePath={`/notes/${category}/`}>{note.content}</Markdown>
           </div>
         ))
       )}
