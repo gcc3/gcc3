@@ -10,6 +10,12 @@ const links = (process.env.REACT_APP_LINKS || "").split(";").map(link => {
   return { name, url };
 }).filter(link => link.name && link.url);
 
+const handleSearchKeyDown = (event, searchText, setSearchText) => {
+  if (event.key === "Escape" && searchText) {
+    setSearchText("");
+  }
+};
+
 const Sidebar = ({ categories = [], categoryNoteList = {}, onCategoryClick, onCollapse }) => {
   const [searchText, setSearchText] = useState("");
 
@@ -59,6 +65,7 @@ const Sidebar = ({ categories = [], categoryNoteList = {}, onCategoryClick, onCo
               type="text"
               value={searchText}
               onChange={e => setSearchText(e.target.value)}
+              onKeyDown={event => handleSearchKeyDown(event, searchText, setSearchText)}
               placeholder="search notes"
               className={styles.searchInput}
               aria-label="Search notes"
