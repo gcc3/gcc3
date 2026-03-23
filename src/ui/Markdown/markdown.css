@@ -20,31 +20,20 @@
   font-size: 1.75rem;
   border-bottom: 1px solid black;
   margin-top: 10px;
+  margin-bottom: 1rem;
 }
 
-.md-root .md-token-heading-2 {
-  font-size: 1.25rem;
-  margin-top: 0.7rem;
-  margin-bottom: 0.3rem;
-}
-
-.md-root .md-token-heading-3 {
-  font-size: 1.25rem;
-  margin-top: 0.7rem;
-  margin-bottom: 0.3rem;
-}
-
-.md-root .md-token-heading-4 {
-  font-size: 1.25rem;
-  margin-top: 0.7rem;
-  margin-bottom: 0.3rem;
-}
-
+.md-root .md-token-heading-2,
+.md-root .md-token-heading-3,
+.md-root .md-token-heading-4,
 .md-root .md-token-heading-5,
 .md-root .md-token-heading-6 {
-  font-size: 1.25rem;
-  margin-top: 0.7rem;
-  margin-bottom: 0.3rem;
+  font-size: 14px;
+  font-weight: 450;
+  text-decoration: underline;
+  text-underline-offset: 0.4em;
+  margin-top: 1rem;
+  margin-bottom: 0.9rem;
 }
 
 .md-root .md-token-blockquote {
