@@ -148,7 +148,11 @@ const Content = ({ content = "" }) => {
 
   return (
     <>
-      {parsed.type === "category" ? <Markdown>{`**${toCategoryTitle(parsed.category)}**`}</Markdown> : null}
+      {parsed.type === "category" ? (
+        <div className={styles.categoryName}>
+          <Markdown>{`**${toCategoryTitle(parsed.category)}**`}</Markdown>
+        </div>
+      ) : null}
 
       {loading ? (
         <div className={styles.loading}>Loading...</div>
