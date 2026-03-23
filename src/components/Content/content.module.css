@@ -19,3 +19,7 @@
 .note {
   margin-bottom: 14px;
 }
+
+.noteAnchor {
+  scroll-margin-top: 16px;
+}

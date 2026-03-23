@@ -161,7 +161,7 @@ const Content = ({ content = "" }) => {
         <div>
           <div className={styles.notes}>
             {notes.map(note => (
-              <div id={toNoteId(parsed.category, note.filename)} key={note.filename}>
+              <div id={toNoteId(parsed.category, note.filename)} key={note.filename} className={styles.noteAnchor}>
                 <Markdown basePath={`/notes/${parsed.category}/`}>{note.content}</Markdown>
               </div>
             ))}
@@ -169,7 +169,7 @@ const Content = ({ content = "" }) => {
           <Copyright />
         </div>
       ) : !singleNote ? null : (
-        <div id={toNoteId(parsed.category, singleNote.filename)} key={singleNote.filename}>
+        <div id={toNoteId(parsed.category, singleNote.filename)} key={singleNote.filename} className={styles.noteAnchor}>
           <div className={styles.note}>
             <Markdown basePath={`/notes/${parsed.category}/`}>{singleNote.content}</Markdown>
           </div>
