@@ -22,6 +22,35 @@ app.use((req, res, next) => {
   return next();
 });
 
+app.use('/api', (req, res, next) => {
+  const startTime = Date.now();
+
+  res.on('finish', () => {
+    const durationMs = Date.now() - startTime;
+    console.log(`[API] ${req.method} ${req.originalUrl} ${res.statusCode} ${durationMs}ms`);
+  });
+
+  next();
+});
+
+app.use((req, res, next) => {
+  const isStaticFileRequest =
+    (req.method === 'GET' || req.method === 'HEAD')
+    && (req.path.startsWith('/notes/') || path.extname(req.path) !== '');
+
+  if (!isStaticFileRequest) {
+    return next();
+  }
+
+  const startTime = Date.now();
+  res.on('finish', () => {
+    const durationMs = Date.now() - startTime;
+    console.log(`[STATIC] ${req.method} ${req.originalUrl} ${res.statusCode} ${durationMs}ms`);
+  });
+
+  return next();
+});
+
 // Serve the built frontend and static note files from the same server.
 app.use(express.static(publicDir));
 
@@ -63,5 +92,19 @@ app.get('/api/categories/:category/notes', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Listening on port ${port}`)
+  const pageUrl = `http://localhost:${port}/`;
+  const apiBaseUrl = `http://localhost:${port}/api`;
+  const apiEndpoints = [
+    `GET ${apiBaseUrl}/categories`,
+    `GET ${apiBaseUrl}/categories/:category/notes`,
+  ];
+  console.log(`Webapp endpoint: ${pageUrl}`);
+  console.log(`API endpoint: ${apiBaseUrl}`);
+  console.log('\nAvailable APIs:');
+  apiEndpoints.forEach((endpoint) => {
+    console.log(`- ${endpoint}`);
+  });
+
+  // newline
+  console.log();
 })
