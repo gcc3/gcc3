@@ -50,10 +50,10 @@ h3 {
   font-size: medium;
 }
 
-.content-view,
-.content-view p,
-.content-view li,
-.content-view a {
+.content,
+.content p,
+.content li,
+.content a {
   overflow-wrap: anywhere;
   word-break: break-word;
 }

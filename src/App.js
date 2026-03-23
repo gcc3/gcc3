@@ -87,9 +87,9 @@ const App = () => {
       )}
 
       <div
-        className={clsx(styles.content, { [styles.contentExpanded]: isSidebarCollapsed })}
+        className={clsx(styles.contentContainer, { [styles.contentExpanded]: isSidebarCollapsed })}
       >
-        <div className="content-view" id="main-view">
+        <div className="content" id="main-view">
           {selectedNote ? (
             <Note category={category} note_={selectedNote} />
           ) : (
