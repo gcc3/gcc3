@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import clsx from "clsx";
-import { Content, Sidebar, Copyright } from "./components";
+import { Content, Sidebar } from "./components";
 import styles from "./app.module.css";
 import { clearHash } from "@utils/hashUtils";
 
@@ -79,7 +79,6 @@ const App = () => {
       >
         <div className="content" id="main-view">
           <Content content={content} />
-          <Copyright />
         </div>
 
         {isSidebarCollapsed && (

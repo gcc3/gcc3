@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import Markdown from "@ui/Markdown";
 import { toCategoryTitle, toNoteId } from "@utils/textUtils";
 import styles from "./content.module.css";
+import { Copyright } from "@components";
 
 const NOTES_LIMIT = 30;
 
@@ -147,7 +148,7 @@ const Content = ({ content = "" }) => {
   }
 
   return (
-    <>
+    <div>
       {parsed.type === "category" ? (
         <div className={styles.categoryName}>
           <Markdown>{`**${toCategoryTitle(parsed.category)}**`}</Markdown>
@@ -157,19 +158,23 @@ const Content = ({ content = "" }) => {
       {loading ? (
         <div className={styles.loading}>Loading...</div>
       ) : parsed.type === "category" ? (
-        <div className={styles.notes}>
-          {notes.map(note => (
-            <div id={toNoteId(parsed.category, note.filename)} key={note.filename}>
-              <Markdown basePath={`/notes/${parsed.category}/`}>{note.content}</Markdown>
-            </div>
-          ))}
+        <div>
+          <div className={styles.notes}>
+            {notes.map(note => (
+              <div id={toNoteId(parsed.category, note.filename)} key={note.filename}>
+                <Markdown basePath={`/notes/${parsed.category}/`}>{note.content}</Markdown>
+              </div>
+            ))}
+          </div>
+          <Copyright />
         </div>
       ) : !singleNote ? null : (
         <div id={toNoteId(parsed.category, singleNote.filename)} key={singleNote.filename}>
           <Markdown basePath={`/notes/${parsed.category}/`}>{singleNote.content}</Markdown>
+          <Copyright />
         </div>
       )}
-    </>
+    </div>
   );
 };
 
