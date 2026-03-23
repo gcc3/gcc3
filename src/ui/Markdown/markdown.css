@@ -33,6 +33,8 @@
   font-size: 14px;
   font-weight: 450;
   text-decoration: underline;
+  text-decoration-color: black;
+  text-decoration-thickness: 1px;
   text-underline-offset: 0.4em;
   margin-top: 1rem;
   margin-bottom: 0.9rem;
