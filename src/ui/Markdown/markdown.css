@@ -7,8 +7,8 @@
 }
 
 .md-root .md-token-paragraph {
-  margin: 0 0 1rem;
-  margin-bottom: 0.5rem;
+  margin-top: 8px;
+  margin-bottom: 0;
 }
 
 .md-root .md-token-heading {
@@ -60,12 +60,14 @@
 }
 
 .md-root .md-token-list-ordered {
-  margin: 0 0 1rem;
-  padding-left: 1.6rem;
+  padding-left: 1.8rem;
   margin-bottom: 0;
 }
 
-.md-root .md-token-list-item,
+.md-root .md-token-list-item {
+  margin: 0;
+}
+
 .md-root .md-token-task-item {
   margin: 0.25rem 0;
 }
