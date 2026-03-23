@@ -23,20 +23,28 @@
 }
 
 .md-root .md-token-heading-2 {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
+  margin-top: 0.7rem;
+  margin-bottom: 0.3rem;
 }
 
 .md-root .md-token-heading-3 {
   font-size: 1.25rem;
+  margin-top: 0.7rem;
+  margin-bottom: 0.3rem;
 }
 
 .md-root .md-token-heading-4 {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
+  margin-top: 0.7rem;
+  margin-bottom: 0.3rem;
 }
 
 .md-root .md-token-heading-5,
 .md-root .md-token-heading-6 {
-  font-size: 1rem;
+  font-size: 1.25rem;
+  margin-top: 0.7rem;
+  margin-bottom: 0.3rem;
 }
 
 .md-root .md-token-blockquote {
