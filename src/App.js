@@ -6,18 +6,17 @@ import { clearHash } from "@utils/hashUtils";
 
 const siteName = process.env.REACT_APP_NAME || "";
 
-globalThis.content = "category";
+globalThis.content = "";
 
 const App = () => {
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [category, setCategory] = useState("");
-  const [categories, setCategories] = useState([]);
 
   // Sidebar
-  const [categoryNoteList, setCategoryNoteList] = useState({});
-  const [showCategory, setShowCategory] = useState(true);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [index, setIndex] = useState({});
 
   // Content
+  const [showCategory, setShowCategory] = useState(true);
   const [note, setNote] = useState("");
 
   // Initialize
@@ -28,32 +27,32 @@ const App = () => {
     // I. Load categories
     fetch("/api/categories")
       .then(response => response.json())
-      .then(data => setCategories(data))
+      .then(data => {
+        const categories = data || [];
+
+        // II. Load note list for each category
+        Promise.all(
+          categories.map(category =>
+            fetch(`/api/categories/${category}/notes`)
+              .then(response => response.json())
+              .then(notes => ({ category: category, notes: notes }))
+              .catch(() => ({ category: category, notes: [] }))
+          )
+        ).then(results => {
+          const map = {};
+          results.forEach(({ category, notes }) => { map[category] = notes; });
+          setIndex(map);
+        });
+
+        // III. Set initial category
+        if (categories.length > 0) {
+          globalThis.content = "category:" + categories[0];
+          setCategory(categories[0]);
+          setShowCategory(true);
+        }
+      })
       .catch(error => console.error(error));
   }, []);
-
-  useEffect(() => {
-    // II. Load note list for each category
-    Promise.all(
-      categories.map(category =>
-        fetch(`/api/categories/${category}/notes`)
-          .then(response => response.json())
-          .then(data => ({ cat: category, data }))
-          .catch(() => ({ cat: category, data: [] }))
-      )
-    ).then(results => {
-      const map = {};
-      results.forEach(({ cat, data }) => { map[cat] = data; });
-      setCategoryNoteList(map);
-    });
-
-    // III. Set initial category
-    if (categories.length > 0) {
-      globalThis.content = "category:" + categories[0];
-      setCategory(categories[0]);
-      setShowCategory(true);
-    }
-  }, [categories]);
 
   const handleCategorySelected = nextCategory => {
     globalThis.content = "category:" + nextCategory;
@@ -72,8 +71,7 @@ const App = () => {
     <div className={clsx(styles.wrapper, styles.wrapperInlineBlock)}>
       {!isSidebarCollapsed && (
         <Sidebar
-          categories={categories}
-          categoryNoteList={categoryNoteList}
+          index={index}
           onCategorySelected={handleCategorySelected}
           onNoteSelected={handleNoteSelected}
           onCollapse={() => setIsSidebarCollapsed(true)}

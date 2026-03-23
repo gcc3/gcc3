@@ -12,23 +12,23 @@ const links = (process.env.REACT_APP_LINKS || "").split(";").map(link => {
 }).filter(link => link.name && link.url);
 
 const Sidebar = ({
-  categories = [],
-  categoryNoteList = {},
+  index = {},  // map[category] = notes
   onCategorySelected,
   onNoteSelected,
   onCollapse,
 }) => {
   const [searchText, setSearchText] = useState("");
+  const categories = useMemo(() => Object.keys(index), [index]);
 
   // Note filtering based on search text
   const filteredCategoryNoteList = useMemo(() => {
     const keyword = searchText.trim().toLowerCase();
     if (!keyword) {
-      return categoryNoteList;
+      return index;
     }
 
     return categories.reduce((acc, cat) => {
-      const filteredNotes = (categoryNoteList[cat] || []).filter(note =>
+      const filteredNotes = (index[cat] || []).filter(note =>
         toNoteTitle(note).toLowerCase().includes(keyword)
       );
 
@@ -38,7 +38,7 @@ const Sidebar = ({
 
       return acc;
     }, {});
-  }, [categories, categoryNoteList, searchText]);
+  }, [categories, index, searchText]);
 
   const hasFilteredNotes = useMemo(
     () => categories.some(category => (filteredCategoryNoteList[category] || []).length > 0),
