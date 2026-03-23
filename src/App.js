@@ -15,10 +15,10 @@ const App = () => {
 
   // Sidebar
   const [categoryNoteList, setCategoryNoteList] = useState({});
-  const [selectedNote, setSelectedNote] = useState("");
+  const [showCategory, setShowCategory] = useState(true);
 
   // Content
-  const [notes, setNotes] = useState([]);
+  const [note, setNote] = useState("");
 
   // Initialize
   useEffect(() => {
@@ -51,32 +51,21 @@ const App = () => {
     if (categories.length > 0) {
       globalThis.content = "category:" + categories[0];
       setCategory(categories[0]);
-      setSelectedNote("");
+      setShowCategory(true);
     }
   }, [categories]);
-
-  useEffect(() => {
-    if (!category) {
-      setNotes([]);
-      return;
-    }
-
-    fetch(`/api/notes/${category}`)
-      .then(response => response.json())
-      .then(data => setNotes(data))
-      .catch(error => console.error(error));
-  }, [category]);
 
   const handleCategorySelected = nextCategory => {
     globalThis.content = "category:" + nextCategory;
     setCategory(nextCategory);
-    setSelectedNote("");
+    setShowCategory(true);
   };
 
   const handleNoteSelected = (nextCategory, nextNote) => {
     globalThis.content = "note:" + nextCategory + "[" + nextNote + "]";
     setCategory(nextCategory);
-    setSelectedNote(nextNote);
+    setShowCategory(false);
+    setNote(nextNote);
   };
 
   return (
@@ -95,10 +84,10 @@ const App = () => {
         className={clsx(styles.contentContainer, { [styles.contentExpanded]: isSidebarCollapsed })}
       >
         <div className="content" id="main-view">
-          {selectedNote ? (
-            <Note category={category} note_={selectedNote} />
+          {showCategory ? (
+            <Category category={category} />
           ) : (
-            <Category category={category} notes_={notes} />
+            <Note category={category} note_={note} />
           )}
           <Copyright />
         </div>
