@@ -3,7 +3,7 @@ gcc³
 ====
 
 
-Light weight blog system.  
+Light weight blog application.  
 Used by [gcc³](https://gcc3.com) web.  
 
 
