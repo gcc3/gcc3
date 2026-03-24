@@ -1,17 +1,12 @@
-const chokidar = require('chokidar');
+const fs = require('fs');
 
 function createRealtimeWatcher(notesDir) {
   const watchClients = new Set();
 
-  const watcher = chokidar.watch(notesDir, {
-    ignored: /(^|[\/\\])\../, // ignore dotfiles
-    persistent: true,
-    ignoreInitial: true,
-  });
-
-  watcher.on('all', (event, fullPath) => {
-    const relative = require('path').relative(notesDir, fullPath);
-    const message = "data: " + relative + "\n\n";
+  // Watch the notes directory recursively and notify all SSE clients
+  fs.watch(notesDir, { recursive: true }, (eventType, filename) => {
+    if (!filename || filename.startsWith('.')) return;
+    const message = "data: " + filename + "\n\n";
     for (const res of watchClients) {
       res.write(message);
     }
