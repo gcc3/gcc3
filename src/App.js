@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 import { Content, Sidebar } from "./components";
+import { Toast } from "./ui";
 import styles from "./app.module.css";
 import { clearHash } from "@utils/hashUtils";
 import { parseContent } from "@utils/contentUtils";
@@ -19,12 +20,21 @@ const App = () => {
   const [content, setContent] = useState("");
   const [reload, setReload] = useState(0);  // key trick
 
+  // Toast
+  const toastRef = React.useRef(null);
+  const showToast = (content = "") => toastRef.current?.show(content);
+
   // Initialize
   useEffect(() => {
     document.title = siteName;
     clearHash();
 
     // Set up SSE connection to receive real-time updates when notes change
+    const reloadContent = (content) => {
+      console.log("reload content: " + (content ? content : "(all categories)"));
+      setReload(k => k + 1);
+      showToast("Content updated.");
+    }
     const es = new EventSource('/api/watch');
     es.onmessage = (event) => {
       const message = event.data;
@@ -34,11 +44,11 @@ const App = () => {
       const content_ = globalThis.content;
       const content = parseContent(content_);
       if (content.type === "") {
-        console.log("reload content: (all categories)");
-        setReload(k => k + 1);
-      } else if (message.includes(content.category) || message.includes(content.note)) {
-        console.log("reload content: " + content_);
-        setReload(k => k + 1);
+        reloadContent(content_);
+      } else if (content.type === "category" && message.includes(content.category)) {
+        reloadContent(content_);
+      } else if (content.type === "note" && message.includes(content.category) && message.includes(content.note)) {
+        reloadContent(content_);
       }
     }
 
@@ -95,6 +105,7 @@ const App = () => {
 
   return (
     <div className={clsx(styles.wrapper, styles.wrapperInlineBlock)}>
+      <Toast ref={toastRef} />
       {!isSidebarCollapsed && (
         <Sidebar
           index={index}
@@ -113,7 +124,6 @@ const App = () => {
         <div className="content" id="main-view">
           <Content content_={content} reloadKey={reload} />
         </div>
-
         {isSidebarCollapsed && (
           <div
             className={styles.expandSidebarButton}
