@@ -174,29 +174,20 @@ const Content = ({ content = "" }) => {
   }
 
   if (parsed.type === "note") {
-    <div>
-      {loading ? (
-        <div className={styles.loading}>Loading...</div>
-      ) : parsed.type === "category" ? (
-        <div>
-          <div className={styles.notes}>
-            {notes.map(note => (
-              <div id={toNoteId(parsed.category, note.filename)} key={note.filename} className={styles.noteAnchor}>
-                <Markdown basePath={`/notes/${parsed.category}/`}>{note.content}</Markdown>
-              </div>
-            ))}
+    return (
+      <div>
+        {loading ? (
+          <div className={styles.loading}>Loading...</div>
+        ) : !singleNote ? null : (
+          <div id={toNoteId(parsed.category, singleNote.filename)} key={singleNote.filename} className={styles.noteAnchor}>
+            <div className={styles.note}>
+              <Markdown basePath={`/notes/${parsed.category}/`}>{singleNote.content}</Markdown>
+            </div>
+            <Copyright />
           </div>
-          <Copyright />
-        </div>
-      ) : !singleNote ? null : (
-        <div id={toNoteId(parsed.category, singleNote.filename)} key={singleNote.filename} className={styles.noteAnchor}>
-          <div className={styles.note}>
-            <Markdown basePath={`/notes/${parsed.category}/`}>{singleNote.content}</Markdown>
-          </div>
-          <Copyright />
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    )
   }
 
   return <></>;
