@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { Content, Sidebar } from "./components";
-import { Toast } from "./ui";
+import { Toast, showToast } from "./ui";
 import styles from "./app.module.css";
 import { clearHash } from "@utils/hashUtils";
 import { parseContent } from "@utils/contentUtils";
@@ -19,10 +19,6 @@ const App = () => {
   // Content
   const [content, setContent] = useState("");
   const [reload, setReload] = useState(0);  // key trick
-
-  // Toast
-  const toastRef = React.useRef(null);
-  const showToast = (content = "") => toastRef.current?.show(content);
 
   // Initialize
   useEffect(() => {
@@ -105,7 +101,7 @@ const App = () => {
 
   return (
     <div className={clsx(styles.wrapper, styles.wrapperInlineBlock)}>
-      <Toast ref={toastRef} />
+      <Toast />
       {!isSidebarCollapsed && (
         <Sidebar
           index={index}
