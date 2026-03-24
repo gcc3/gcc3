@@ -42,6 +42,18 @@ export function toNoteTitle(note_) {
   return note;
 }
 
+export function toCategoryId(category_) {
+  let category = category_;
+
+  // Remove leading digits and underscore
+  category = category.replace(/^\d+_/, '');
+
+  // Replace the whitespace with underscore
+  category = category.replace(/\s+/g, '_');
+
+  return category;
+}
+
 export function toCategoryTitle(category_) {
   let category = category_;
 

@@ -1,8 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Markdown from "@ui/Markdown";
-import { toCategoryTitle, toNoteId } from "@utils/textUtils";
+import { toCategoryTitle, toNoteId, toCategoryId } from "@utils/textUtils";
 import styles from "./content.module.css";
 import { Copyright } from "@components";
+import clx from "clsx";
 
 const NOTES_LIMIT = 30;
 
@@ -150,7 +151,7 @@ const Content = ({ content = "" }) => {
   return (
     <div>
       {parsed.type === "category" ? (
-        <div className={styles.categoryName}>
+        <div id={toCategoryId(parsed.category)} className={clx(styles.categoryName, styles.categoryAnchor)}>
           {toCategoryTitle(parsed.category)}
         </div>
       ) : null}

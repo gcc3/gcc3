@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import styles from "./sidebar.module.css";
-import { toNoteId, toNoteTitle, toCategoryTitle } from "../../utils/textUtils";
+import { toNoteId, toNoteTitle, toCategoryTitle, toCategoryId } from "../../utils/textUtils";
 import { clearHash } from "@utils/hashUtils";
 
 const siteName = process.env.REACT_APP_NAME || "";
@@ -53,15 +53,13 @@ const Sidebar = ({
 
   // Category click handler
   const handleCategoryClick = (category) => {
-    console.log(`category clicked: ${category}`);
-
-    clearHash();
+    console.log(`category: category=${category}, categoryId=${toCategoryId(category)}`);
     onCategorySelected?.(category);
   };
 
   // Note click handler
   const handleNoteClick = (category, note) => {
-    console.log(`note clicked: category=${category}, note=${note}, noteid=${toNoteId(category, note)}`);
+    console.log(`note: category=${category}, note=${note}, noteid=${toNoteId(category, note)}`);
 
     // Not on category page
     // Not on the same note page
@@ -123,12 +121,13 @@ const Sidebar = ({
 
             return (
               <div className={styles.categories} key={category}>
-                <div
+                <a
                   className={styles.category}
+                  href={`#${toCategoryId(category)}`}
                   onClick={() => handleCategoryClick(category)}
                 >
                   {toCategoryTitle(category)}
-                </div>
+                </a>
                 {notes.map(note => (
                   <div key={note}>
                     <a
