@@ -148,14 +148,33 @@ const Content = ({ content = "" }) => {
     return null;
   }
 
-  return (
-    <div>
-      {parsed.type === "category" ? (
+  if (parsed.type === "category") {
+    return (
+      <div>
         <div id={toCategoryId(parsed.category)} className={clx(styles.categoryName, styles.categoryAnchor)}>
           {toCategoryTitle(parsed.category)}
         </div>
-      ) : null}
 
+        {loading ? (
+          <div className={styles.loading}>Loading...</div>
+        ) : (
+          <div>
+            <div className={styles.notes}>
+              {notes.map(note => (
+                <div id={toNoteId(parsed.category, note.filename)} key={note.filename} className={styles.noteAnchor}>
+                  <Markdown basePath={`/notes/${parsed.category}/`}>{note.content}</Markdown>
+                </div>
+              ))}
+            </div>
+            <Copyright />
+          </div>
+        )}
+      </div>
+    )
+  }
+
+  if (parsed.type === "note") {
+    <div>
       {loading ? (
         <div className={styles.loading}>Loading...</div>
       ) : parsed.type === "category" ? (
@@ -178,7 +197,9 @@ const Content = ({ content = "" }) => {
         </div>
       )}
     </div>
-  );
+  }
+
+  return <></>;
 };
 
 export default Content;
