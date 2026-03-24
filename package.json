@@ -1,7 +1,7 @@
 {
   "name": "gcc3",
   "version": "1.0.0",
-  "description": "GCC³ web",
+  "description": "gcc³ web",
   "main": "index.js",
   "scripts": {
     "start": "node ./src/serve.js",
