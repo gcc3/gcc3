@@ -37,3 +37,24 @@ export function toCategoryTitle(category_) {
 
   return category + ":";
 }
+
+
+export function pathToContent(path, defaultContent) {
+  let content = defaultContent;
+
+  if (path.includes(":")) {
+    const colonIndex = path.indexOf(":");
+    const category = path.slice(0, colonIndex);
+    const note = path.slice(colonIndex + 1);
+
+    let type = "null";
+    if (note) {
+      type = "note";
+    } else {
+      type = "category";
+    }
+    content = `[${type}]${category}:${note}`;
+  }
+
+  return content;
+}

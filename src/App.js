@@ -34,7 +34,7 @@ const App = () => {
         setIndex(index);
 
         console.log("index:", JSON.stringify(index, null, 2));
-        console.log("content:", DEFAULT_CONTENT);
+        console.log("content:", globalThis.content);
       })
       .catch(error => console.error(error));
 
