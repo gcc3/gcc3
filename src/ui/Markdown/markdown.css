@@ -48,22 +48,19 @@
 }
 
 .md-root .md-token-list {
-  margin: 0 0 1rem;
   padding-left: 1rem;
-  margin-bottom: 0.5rem;
 }
 
 .md-root .md-token-list-unordered {
-  margin: 0 0 1rem;
+  margin: 8px 0 0 0;
   padding-left: 1rem;
-  margin-bottom: 0;
 }
 
 .md-root .md-token-list-ordered {
+  margin: 0 0 0 0;
   list-style: none;
   counter-reset: li-counter;
   padding-left: 0.2rem;
-  margin-bottom: 0;
 }
 
 .md-root .md-token-list-ordered > .md-token-list-item {
