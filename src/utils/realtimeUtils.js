@@ -1,5 +1,7 @@
 const fs = require('fs');
 
+const KEEP_ALIVE = 60000;
+
 function createRealtimeWatcher(notesDir) {
   const watchClients = new Set();
 
@@ -21,7 +23,12 @@ function createRealtimeWatcher(notesDir) {
     res.flushHeaders();
 
     watchClients.add(res);
+    const keepAlive = setInterval(() => {
+      res.write(': keep-alive\n\n');
+    }, KEEP_ALIVE);
+
     req.on('close', () => {
+      clearInterval(keepAlive);
       watchClients.delete(res);
     });
   }
