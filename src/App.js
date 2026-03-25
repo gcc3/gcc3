@@ -11,6 +11,9 @@ const USE_REALTIME = process.env.REACT_APP_USE_REALTIME === "true";
 const DEFAULT_CONTENT = process.env.REACT_APP_DEFAULT_CONTENT || "[categories]";
 
 const urlContent = new URLSearchParams(window.location.search).get("content");
+if (urlContent) {
+  history.replaceState(null, "", window.location.pathname);
+}
 const INITIAL_CONTENT = urlContent || DEFAULT_CONTENT;
 
 globalThis.content = INITIAL_CONTENT;
