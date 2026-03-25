@@ -101,6 +101,12 @@ const Sidebar = ({
     console.log("window hash (decoded):", windowHashDecoded);
 
     if (category === "__root__") {
+      if (currentContent.type === "categories" || currentContent.category !== "__root__") {
+        // Go to note page
+        onSetContent(`[note]__root__:${note}`);
+        return;
+      }
+
       // If the hash is already the note id
       if (windowHashDecoded === `#${noteId}`) {
         // Go to note page
