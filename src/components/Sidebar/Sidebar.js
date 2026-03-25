@@ -55,6 +55,12 @@ const Sidebar = ({
     console.log(`category: category=${category}, categoryId=${toCategoryId(category)}`);
     const content = parseContent(globalThis.content);
 
+    if (category === "__root__") {
+      // Go to root page
+      onSetContent("[category]__root__:");
+      return;
+    }
+
     if (content.type === "note") {
       // Go to category page
       onSetContent(`[category]${category}:`);
@@ -81,6 +87,15 @@ const Sidebar = ({
   const handleNoteClick = (category, note) => {
     console.log(`note: category=${category}, note=${note}, noteid=${toNoteId(category, note)}`);
     const content = parseContent(globalThis.content);
+
+    if (category === "__root__") {
+      // If the hash is already the note id
+      if (window.location.hash === `#${toNoteId(category, note)}`) {
+        // Go to note page
+        onSetContent(`[note]${category}:${note}`);
+        return;
+      }
+    }
 
     if (content.type === "note" && (content.category !== category || content.note !== note)) {
       // Go to note page
