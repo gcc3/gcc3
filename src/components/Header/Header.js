@@ -191,17 +191,20 @@ const Header = ({
             }
 
             return (
-              <div className={styles.categories} key={category}>
-                <a
-                  className={styles.category}
-                  href={`#${toCategoryId(category)}`}
-                  onClick={() => handleCategoryClick(category)}
-                >
-                  {toCategoryTitle(category)}
-                </a>
+              <div className={styles.category} key={category}>
+                <div>
+                  <a
+                    className={styles.categoryName}
+                    href={`#${toCategoryId(category)}`}
+                    onClick={() => handleCategoryClick(category)}
+                  >
+                    {toCategoryTitle(category)}
+                  </a>
+                </div>
                 {notes.map(note => (
                   <div key={note}>
                     <a
+                      key={note}
                       className={styles.note}
                       href={`#${toNoteId(category, note)}`}
                       onClick={() => handleNoteClick(category, note)}

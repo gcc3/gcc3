@@ -49,13 +49,15 @@
   margin-top: 16px;
 }
 
-.categories {
+.category {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: 12px;
+  line-height: 1;
 }
 
-.category {
+.categoryName {
   font-weight: bold;
   cursor: pointer;
   text-decoration: none;

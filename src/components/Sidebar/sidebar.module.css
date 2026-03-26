@@ -80,13 +80,13 @@
   gap: 16px;
 }
 
-.categories {
+.category {
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
 
-.category {
+.categoryName {
   font-weight: bold;
   cursor: pointer;
   text-decoration: none;
