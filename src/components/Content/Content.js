@@ -224,7 +224,6 @@ const Content = ({ content_ = "", reload = 0 }) => {
             <div className={clx(styles.note, styles.noteAnchor)}>
               <Markdown
                 basePath={`/notes/${content.category}/`}
-                url={toContentUrl(content)}
               >{note.content}</Markdown>
             </div>
             <Share content_={content_} showToast={showToast} />
