@@ -27,6 +27,7 @@
 }
 
 .collapseButton {
+  margin-right: 1px;
   cursor: pointer;
 }
 
