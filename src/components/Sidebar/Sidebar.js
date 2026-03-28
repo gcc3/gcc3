@@ -5,6 +5,7 @@ import { parseContent } from "@utils/contentUtils";
 import { NOTES_LIMIT } from "@constants";
 
 const APP_NAME = process.env.REACT_APP_NAME || "";
+const APP_SUBTITLE = process.env.REACT_APP_SUBTITLE || "";
 const USE_SEARCH = process.env.REACT_APP_USE_SEARCH === "true";
 const LINKS = (process.env.REACT_APP_LINKS || "").split(";").map(link => {
   const [name, url] = link.split("=").map(part => part.trim());
@@ -164,6 +165,7 @@ const Sidebar = ({
           <a href={window.location.origin} className={styles.linkReset}>
             <h1 className={styles.brand}>{APP_NAME}</h1>
           </a>
+          {APP_SUBTITLE && <div className={styles.subtitle}>{APP_SUBTITLE}</div>}
         </div>
 
         <div className={styles.categoryRow}>
@@ -172,7 +174,7 @@ const Sidebar = ({
             className={styles.collapseButton}
             onClick={onCollapse}
           >
-            {"<<"}
+            {"←"}
           </h5>
         </div>
 

@@ -1,4 +1,8 @@
 .title {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: baseline;
   padding-top: 10px;
 }
 
@@ -10,6 +14,12 @@
   display: inline;
 }
 
+.subtitle {
+  font-weight: bold;
+  font-size: 18px;
+  color: gray;
+}
+
 .categoryRow {
   display: flex;
   justify-content: space-between;
@@ -17,7 +27,6 @@
 }
 
 .collapseButton {
-  width: 15px;
   cursor: pointer;
 }
 

@@ -8,6 +8,7 @@ import { parseContent } from "@utils/contentUtils";
 import { isMobile } from "@utils/mobileUtils";
 
 const APP_NAME = process.env.REACT_APP_NAME || "";
+const APP_SUBTITLE = process.env.REACT_APP_SUBTITLE || "";
 const USE_REALTIME = process.env.REACT_APP_USE_REALTIME === "true";
 const DEFAULT_CONTENT = process.env.REACT_APP_DEFAULT_CONTENT || "[categories]";
 
@@ -31,7 +32,7 @@ const App = () => {
 
   // Initialize
   useEffect(() => {
-    document.title = APP_NAME;
+    document.title = APP_NAME + (APP_SUBTITLE ? ` ${APP_SUBTITLE}` : "");
     clearHash();
 
     // Load index
