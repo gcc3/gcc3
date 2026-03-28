@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'gcc3',
+      name: 'content-hub',
       script: 'npm',
       args: 'start',
     },
