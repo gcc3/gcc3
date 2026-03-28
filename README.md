@@ -3,10 +3,12 @@ Content Hub
 ===========
 
 
-Light weight content hub.  
-Use Markdown to write text, load in realtime.  
-It can be used as a blog system, content server etc...  
-Used by [gcc³.com](https://gcc3.com) web.  
+Light weight content hub, originally developed for [gcc³.com](https://gcc3.com) web.  
+It can be used as a blog system, content server , document server, etc...  
+
+Features:  
+Use Markdown to write text files, auto indexing.  
+Load in realtime.  
 
 
 How To Use
@@ -28,7 +30,47 @@ You can use PM2 to keep the server alive:
 
 Content  
 Simply write and put the markdown files in the `notes/[category]/*.md` directory.  
-Category will be loaded as indexes in sidebar.  
+Category folders and note files will be loaded to index.  
+
+Scripts  
+`pull.sh`
+pull the source code and the content, recursively.  
+`push-notes.sh`  
+Push all notes recursively.  
+If you want to edit the notes directly on the server.  
+
+
+Content String
+--------------
+
+String with format of `[type]category:note` is used to indicate the content to load.  
+Example: `http://gcc3.com/?content=[note]projects:simple ai.md`  
+
+Format: `[type]category:note`  
+Example:  
+`[category]Life:` indicates to load the category `Life`.  
+`[note]Life:Note1` indicates to load the note `Note1.md` in the category `Life`.  
+
+1. `type`  
+Load types.  
+`type` can be `category`, `note`, `categories`.  
+`[note]` indicates to load the note.  
+`[category]` indicates to load the category.  
+`[categories]` indicates to load all categories.  
+
+2. `category`  
+`category` is the exact folder name.  
+
+3. `note`  
+`note` is the exact relative path of the file, relative to the category folder.  
+e,g: `Note1.md` or `.markdown/Note1.md`.  
+
+- `.markdown` is a subfolder in the category folder
+Refer [.note](https://github.com/lhypds/.note)  
+
+- Root-level content  
+To load the root folder or note in root folder.  
+Use `[category]__root__:` or `[note]__root__:note_name`.  
 
 
 Development
@@ -40,50 +82,10 @@ React https://react.dev/reference/react
 Webpack https://webpack.js.org/guides/  
 Babel https://babeljs.io/docs/  
 
-Develop the project with hot reload:  
-`npm run dev`  
+Develop the project:  
+`npm install` and `npm run dev`  
 
-This will start the webpack dev server at http://localhost:9500/  
-The content server `PORT` can be set in `.env` file.  
-
-Content server APIs  
-/api/categories  
-Get the list of categories.  
-/api/notes/:category  
-Get the list of notes in a category.  
-
-
-Content String
---------------
-
-String with format of `[type]category:note` is used to indicate the content to load.  
-
-1. Load types (`type`)  
-`type` can be `category`, `note`, `categories`.  
-`[note]` indicates to load the note.  
-`[category]` indicates to load the category.  
-`[categories]` indicates to load all categories.  
-
-2. `category`  
-`category` is the exact folder name.  
-
-3. `note`  
-`note` is the exact file name (with relative path, relative to the category folder).  
-So, sometimes contains the parent folder, if it is inside a subfolder.   
-e,g: `Note1.md` or `subfolder/Note1.md`.  
-
-For example:  
-`[category]Life:` indicates to load the category `Life`.
-`[note]Life:Note1` indicates to load the note `Note1.md` in the category `Life`.  
-
-3. Root-level content  
-To load the root folder or note in root folder.  
-Use `[category]__root__:` or `[note]__root__:note_name`.  
-
-* Access content with content string
-Use the query parameter `content` to specify the content string to load.
-Example:
-`http://gcc3.com/?content=[note]projects:simple ai.md`
+For APIs refer `src/serve.js`  
 
 
 .env
@@ -110,3 +112,4 @@ Enable realtime update with SSE.
 
 REACT_APP_DEFAULT_CONTENT  
 Used to set the default load content.  
+
