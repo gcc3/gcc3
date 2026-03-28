@@ -84,15 +84,17 @@ const App = () => {
     <div className={clsx(styles.wrapper, styles.wrapperInlineBlock)}>
       <Toast />
       {useSidebar && !isSidebarCollapsed && (
-        <Sidebar
-          index={index}
-          onSetContent={(content) => {
-            globalThis.content = content;
-            setContent(content);
-            console.log("content:", content);
-          }}
-          onCollapse={() => setIsSidebarCollapsed(true)}
-        />
+        <div className={styles.sidebarContainer}>
+          <Sidebar
+            index={index}
+            onSetContent={(content) => {
+              globalThis.content = content;
+              setContent(content);
+              console.log("content:", content);
+            }}
+            onCollapse={() => setIsSidebarCollapsed(true)}
+          />
+        </div>
       )}
       {!useSidebar && (
         <Header

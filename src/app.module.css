@@ -27,6 +27,13 @@
   margin-left: 0px;
 }
 
+.sidebarContainer {
+  width: var(--sidebar-width);
+  height: 100%;
+  position: fixed;
+  border-right: 1px solid gray; /* a divider */
+}
+
 .expandSidebarButton {
   display: block;
   position: fixed;

@@ -169,7 +169,6 @@ const Sidebar = ({
         <div className={styles.categoryRow}>
           <h5>index</h5>
           <h5
-            id="btn-collapse-sidbar"
             className={styles.collapseButton}
             onClick={onCollapse}
           >
