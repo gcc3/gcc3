@@ -4,6 +4,14 @@
   flex-direction: column;
 }
 
+.title {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: baseline;
+  padding-top: 10px;
+}
+
 .indexLabel {
   font-weight: bold;
   margin-top: 24px;
@@ -15,6 +23,12 @@
 
 .brand {
   display: inline;
+}
+
+.subtitle {
+  font-weight: bold;
+  font-size: 18px;
+  color: gray;
 }
 
 .search {
