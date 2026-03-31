@@ -8,15 +8,15 @@ export function toNoteId(category_, note_) {
 
   let note = note_;
 
+  // Remove the `.markdown/` prefix
+  note = note.replace('.markdown/', '');
+
   // Remove leading digits and underscore
   note = note.replace(/^\d+_/, '')
 
   // Remove the extension
   note = note.replace('.md', '')
     .replace('.MD', '');
-
-  // Remove the `.markdown/` prefix
-  note = note.replace('.markdown/', '');
 
   // Replace the whitespace with underscore
   note = note.replace(/\s+/g, '_');
@@ -30,14 +30,14 @@ export function toNoteId(category_, note_) {
 export function toNoteTitle(note_) {
   let note = note_;
 
+  // Remove the `.markdown/` prefix
+  note = note.replace('.markdown/', '');
+
   // Remove leading digits and underscore
   note = note.replace(/^\d+_/, '')
 
   // Remove the extension
   note = note.replace('.MD', '').replace('.md', '');
-
-  // Remove the `.markdown/` prefix
-  note = note.replace('.markdown/', '');
 
   return note;
 }
