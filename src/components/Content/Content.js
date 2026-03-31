@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Markdown from "@ui/Markdown";
-import { Share } from "@ui";
 import { toCategoryTitle, toNoteId, toCategoryId } from "@utils/textUtils";
 import { parseContent, parseContent_ } from "@utils/contentUtils";
 import styles from "./content.module.css";
 import { Copyright } from "@components";
 import clx from "clsx";
 import { NOTES_LIMIT } from "@constants";
-import { Toast, showToast } from "@ui";
+import { Toast, showToast, Share, Comment } from "@ui";
 
 const Content = ({ content_ = "", reload = 0 }) => {
   const [loading, setLoading] = useState(false);
@@ -237,7 +236,10 @@ const Content = ({ content_ = "", reload = 0 }) => {
                 onHeaderClick={headerClickHandler}
               >{note.content}</Markdown>
             </div>
-            <Share content_={content_} showToast={showToast} />
+            <div className={styles.actions}>
+              <Share content_={parseContent_(content)} showToast={showToast} />
+              <Comment content_={parseContent_(content)} category={content.category} showToast={showToast} />
+            </div>
             <Copyright />
           </div>
         )}

@@ -1,0 +1,82 @@
+.commentIcon {
+  width: 10px;
+  height: 10px;
+}
+
+.commentButton {
+  width: 12px;
+  height: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+  margin-bottom: 2px;
+  font-size: 11px;
+  cursor: pointer;
+  opacity: 0.8;
+  user-select: none;
+  padding: 2px 4px;
+  border: 1px solid black;
+  color: black;
+  background: white;
+}
+
+.commentButton:hover {
+  color: white;
+  background: black;
+}
+
+.title {
+  margin: 0 0 16px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.input,
+.textarea {
+  font-size: 13px;
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-family: inherit;
+  resize: none;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: #000;
+}
+
+.submitButton {
+  align-self: flex-end;
+  font-size: 12px;
+  padding: 4px 14px;
+  border: 1px solid black;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.submitButton:hover:not(:disabled) {
+  background: #454545;
+}
+
+.submitButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

@@ -34,3 +34,8 @@
 .categoryAnchor {
   scroll-margin-top: 20px;
 }
+
+.actions {
+  display: flex;
+  gap: 6px;
+}

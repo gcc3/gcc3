@@ -14,7 +14,7 @@ const notesDir = path.join(publicDir, 'notes');
 // CORS middleware
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', corsOrigin);
-  res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS');
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
 
   if (req.method === 'OPTIONS') {
@@ -22,6 +22,9 @@ app.use((req, res, next) => {
   }
   return next();
 });
+
+// Parse JSON request bodies
+app.use(express.json());
 
 // Logging middleware for API requests
 app.use('/api', (req, res, next) => {
@@ -137,6 +140,46 @@ app.get('/api/categories/:category/notes', (req, res) => {
   }
 });
 
+// Post a comment for a note in a category
+// Appends to public/notes/:category/.comments.json
+app.post('/api/categories/:category/comments', (req, res) => {
+  const category = req.params.category;
+  const baseDir = category === '__root__'
+    ? notesDir
+    : path.resolve(notesDir, category);
+  if (!baseDir.startsWith(notesDir)) {
+    return res.status(400).json({ error: 'Invalid category name' });
+  }
+
+  const { content, email, comment } = req.body || {};
+  if (!email || !comment) {
+    return res.status(400).json({ error: 'email and comment are required' });
+  }
+
+  const timestamp = Date.now();
+  const ip = req.headers['x-forwarded-for']?.split(',')[0].trim() || req.socket.remoteAddress;
+  const commentsFile = path.join(baseDir, '.comments.json');
+
+  let comments = [];
+  if (fs.existsSync(commentsFile)) {
+    try {
+      comments = JSON.parse(fs.readFileSync(commentsFile, 'utf8'));
+    } catch {
+      comments = [];
+    }
+  }
+
+  comments.push({ timestamp, ip, content, email, comment });
+  fs.writeFile(commentsFile, JSON.stringify(comments, null, 2), 'utf8', (err) => {
+    if (err) {
+      console.error('Failed to save comment:', err);
+      return res.status(500).json({ error: 'Failed to save comment' });
+    }
+    console.log(`[COMMENT] saved to ${commentsFile}`);
+    res.status(201).json({ ok: true, timestamp });
+  });
+});
+
 app.listen(port, () => {
   const pageUrl = `http://localhost:${port}/`;
   const apiBaseUrl = `http://localhost:${port}/api`;
@@ -144,6 +187,7 @@ app.listen(port, () => {
     `GET ${apiBaseUrl}/index`,
     `GET ${apiBaseUrl}/categories`,
     `GET ${apiBaseUrl}/categories/:category/notes`,
+    `POST ${apiBaseUrl}/categories/:category/comments`,
   ];
   console.log(`Webapp endpoint: ${pageUrl}`);
   console.log(`API endpoint: ${apiBaseUrl}`);
