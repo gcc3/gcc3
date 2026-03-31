@@ -157,6 +157,7 @@ app.post('/api/categories/:category/comments', (req, res) => {
   }
 
   const timestamp = Date.now();
+  const ip = req.headers['x-forwarded-for']?.split(',')[0].trim() || req.socket.remoteAddress;
   const commentsFile = path.join(baseDir, '.comments.json');
 
   let comments = [];
@@ -168,7 +169,7 @@ app.post('/api/categories/:category/comments', (req, res) => {
     }
   }
 
-  comments.push({ timestamp, content, email, comment });
+  comments.push({ timestamp, ip, content, email, comment });
   fs.writeFile(commentsFile, JSON.stringify(comments, null, 2), 'utf8', (err) => {
     if (err) {
       console.error('Failed to save comment:', err);
