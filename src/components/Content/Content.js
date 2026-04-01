@@ -211,6 +211,10 @@ const Content = ({ content_ = "", reload = 0 }) => {
                     content={{ type: "note", category: content.category, note: note.filename }}
                     onHeaderClick={headerClickHandler}
                   >{note.content}</Markdown>
+                  <div className={styles.actions}>
+                    <Share content_={`[note]${content.category}:${note.filename}`} showToast={showToast} />
+                    <Comment content_={`[note]${content.category}:${note.filename}`} category={content.category} showToast={showToast} />
+                  </div>
                 </div>
               ))}
             </div>
@@ -235,10 +239,10 @@ const Content = ({ content_ = "", reload = 0 }) => {
                 content={{ type: "note", category: content.category, note: note.filename }}
                 onHeaderClick={headerClickHandler}
               >{note.content}</Markdown>
-            </div>
-            <div className={styles.actions}>
-              <Share content_={parseContent_(content)} showToast={showToast} />
-              <Comment content_={parseContent_(content)} category={content.category} showToast={showToast} />
+              <div className={styles.actions}>
+                <Share content_={`[note]${content.category}:${note.filename}`} showToast={showToast} />
+                <Comment content_={`[note]${content.category}:${note.filename}`} category={content.category} showToast={showToast} />
+              </div>
             </div>
             <Copyright />
           </div>
@@ -269,6 +273,10 @@ const Content = ({ content_ = "", reload = 0 }) => {
                           content={{ type: "note", category, note: note.filename }}
                           onHeaderClick={headerClickHandler}
                         >{note.content}</Markdown>
+                        <div className={styles.actions}>
+                          <Share content_={`[note]${category}:${note.filename}`} showToast={showToast} />
+                          <Comment content_={`[note]${category}:${note.filename}`} category={category} showToast={showToast} />
+                        </div>
                       </div>
                     ))}
                   </div>
