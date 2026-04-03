@@ -124,6 +124,7 @@
   text-decoration: none;
 }
 
+.md-root img,
 .md-root .md-token-image {
   display: block;
   max-width: 100%;
