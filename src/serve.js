@@ -175,6 +175,27 @@ router.post('/api/comments', (req, res) => {
   });
 });
 
+// Get comments for a specific content
+router.get('/api/comments/:content', (req, res) => {
+  const { content } = req.params;
+  const commentsFile = path.join(notesDir, '.comments.json');
+
+  if (!fs.existsSync(commentsFile)) {
+    return res.json([]);
+  }
+
+  try {
+    const comments = JSON.parse(fs.readFileSync(commentsFile, 'utf8'));
+    if (!Array.isArray(comments)) {
+      return res.json([]);
+    }
+    const filteredComments = comments.filter((item) => item && item.content === content);
+    return res.json(filteredComments);
+  } catch {
+    return res.status(500).json({ error: 'Failed to read comments' });
+  }
+});
+
 // Mount all routes under basePath (empty string = root, '/docs' = subpath)
 app.use(basePath, router);
 
@@ -185,6 +206,7 @@ app.listen(port, () => {
     `GET ${apiBaseUrl}/index`,
     `GET ${apiBaseUrl}/categories`,
     `GET ${apiBaseUrl}/categories/:category/notes`,
+    `GET ${apiBaseUrl}/comments/:content`,
     `POST ${apiBaseUrl}/comments`,
   ];
   console.log(`Webapp endpoint: ${pageUrl}`);
