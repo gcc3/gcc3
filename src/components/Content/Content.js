@@ -215,7 +215,7 @@ const Content = ({ content_ = "", reload = 0 }) => {
                   >{note.content}</Markdown>
                   <div className={styles.actions}>
                     <Share content_={`[note]${content.category}:${note.filename}`} showToast={showToast} />
-                    <Comment content_={`[note]${content.category}:${note.filename}`} category={content.category} showToast={showToast} />
+                    <Comment content_={`[note]${content.category}:${note.filename}`} showToast={showToast} />
                   </div>
                 </div>
               ))}
@@ -243,7 +243,7 @@ const Content = ({ content_ = "", reload = 0 }) => {
               >{note.content}</Markdown>
               <div className={styles.actions}>
                 <Share content_={`[note]${content.category}:${note.filename}`} showToast={showToast} />
-                <Comment content_={`[note]${content.category}:${note.filename}`} category={content.category} showToast={showToast} />
+                <Comment content_={`[note]${content.category}:${note.filename}`} showToast={showToast} />
               </div>
             </div>
             <Copyright />
@@ -277,7 +277,7 @@ const Content = ({ content_ = "", reload = 0 }) => {
                         >{note.content}</Markdown>
                         <div className={styles.actions}>
                           <Share content_={`[note]${category}:${note.filename}`} showToast={showToast} />
-                          <Comment content_={`[note]${category}:${note.filename}`} category={category} showToast={showToast} />
+                          <Comment content_={`[note]${category}:${note.filename}`} showToast={showToast} />
                         </div>
                       </div>
                     ))}

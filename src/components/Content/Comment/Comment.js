@@ -1,14 +1,38 @@
 import { useState } from "react";
+import { useCallback, useEffect } from "react";
 import ActionButton from "@ui/ActionButton";
 import Modal from "@ui/Modal";
 import styles from "./comment.module.css";
 import { BASE_PATH } from "@constants";
 
-const Comment = ({ content_, category, showToast }) => {
+const Comment = ({ content_, showToast }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [comment, setComment] = useState("");
   const [submitting, setSubmitting] = useState(false);
+
+  const [comments, setComments] = useState([]);
+  const [commentCount, setCommentCount] = useState(0);
+
+  const loadComments = useCallback(async () => {
+    try {
+      const response = await fetch(`${BASE_PATH}/api/comments/${encodeURIComponent(content_)}`);
+      if (!response.ok) {
+        throw new Error(`Request failed with status ${response.status}`);
+      }
+      const comments = await response.json();
+      setComments(comments);
+      setCommentCount(Array.isArray(comments) ? comments.length : 0);
+    } catch (err) {
+      console.error("Failed to fetch comments:", err);
+      setComments([]);
+      setCommentCount(0);
+    }
+  }, [content_]);
+
+  useEffect(() => {
+    loadComments();
+  }, [loadComments]);
 
   const handleOpen = () => setIsOpen(true);
   const handleClose = () => {
@@ -33,6 +57,7 @@ const Comment = ({ content_, category, showToast }) => {
         throw new Error(`Request failed with status ${response.status}`);
       }
 
+      await loadComments();
       showToast?.("Comment submitted!");
       handleClose();
     } catch (err) {
@@ -50,9 +75,11 @@ const Comment = ({ content_, category, showToast }) => {
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
           </svg>
-          <div className={styles.commentCount}>
-            {`1`}
-          </div>
+          {commentCount > 0 && (
+            <div className={styles.commentCount}>
+              {`${commentCount}`}
+            </div>
+          )}
         </div>
       </ActionButton>
 
