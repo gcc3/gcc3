@@ -144,7 +144,7 @@ router.get('/api/categories/:category/notes', (req, res) => {
 });
 
 // Post a comment for a note in a category
-// Appends to public/notes/:category/.comments.json
+// Appends to public/notes/.comments.json
 router.post('/api/categories/:category/comments', (req, res) => {
   const category = req.params.category;
   const baseDir = category === '__root__'
@@ -161,7 +161,7 @@ router.post('/api/categories/:category/comments', (req, res) => {
 
   const timestamp = Date.now();
   const ip = req.headers['x-forwarded-for']?.split(',')[0].trim() || req.socket.remoteAddress;
-  const commentsFile = path.join(baseDir, '.comments.json');
+  const commentsFile = path.join(notesDir, '.comments.json');
 
   let comments = [];
   if (fs.existsSync(commentsFile)) {
