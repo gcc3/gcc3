@@ -5,6 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 20px 0;
   z-index: 1000;
 }
 
@@ -14,8 +15,10 @@
   min-width: 320px;
   max-width: 480px;
   width: 90%;
+  max-height: calc(100vh - 40px);
   position: relative;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
 }
 
 .closeButton {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useCallback, useEffect } from "react";
 import ActionButton from "@ui/ActionButton";
 import Modal from "@ui/Modal";
@@ -10,6 +10,7 @@ const Comment = ({ content_, showToast }) => {
   const [email, setEmail] = useState("");
   const [comment, setComment] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const commentTextareaRef = useRef(null);
 
   const [comments, setComments] = useState([]);
   const [commentCount, setCommentCount] = useState(0);
@@ -34,11 +35,51 @@ const Comment = ({ content_, showToast }) => {
     loadComments();
   }, [loadComments]);
 
+  const formatTimestamp = (value) => {
+    if (!value) {
+      return "";
+    }
+
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) {
+      return "";
+    }
+
+    return date.toLocaleString();
+  };
+
   const handleOpen = () => setIsOpen(true);
   const handleClose = () => {
     setIsOpen(false);
     setEmail("");
     setComment("");
+  };
+
+  const handleCommentItemClick = (value) => {
+    const clickedComment = `${value || ""}`.trim();
+    if (!clickedComment) {
+      return;
+    }
+    const quotedComment = clickedComment
+      .split(/\r?\n/)
+      .map((line) => `> ${line}`)
+      .join("\n");
+    const quoteBlock = `${quotedComment}\n\n`;
+    let nextComment = "";
+    setComment((prev) => {
+      nextComment = `${quoteBlock}${prev}`;
+      return nextComment;
+    });
+
+    requestAnimationFrame(() => {
+      const textarea = commentTextareaRef.current;
+      if (!textarea) {
+        return;
+      }
+      textarea.focus();
+      const endPosition = nextComment.length;
+      textarea.setSelectionRange(endPosition, endPosition);
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -84,40 +125,71 @@ const Comment = ({ content_, showToast }) => {
       </ActionButton>
 
       <Modal isOpen={isOpen} onClose={handleClose}>
-        <h3 className={styles.title}>Leave a Comment</h3>
-        <form onSubmit={handleSubmit} className={styles.form}>
-          <label className={styles.label}>
-            Email
-            <input
-              className={styles.input}
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="your@email.com"
-              required
-              disabled={submitting}
-            />
-          </label>
-          <label className={styles.label}>
-            Comment
-            <textarea
-              className={styles.textarea}
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-              placeholder="Write your comment..."
-              rows={5}
-              required
-              disabled={submitting}
-            />
-          </label>
-          <button
-            type="submit"
-            className={styles.submitButton}
-            disabled={submitting || !email.trim() || !comment.trim()}
-          >
-            {submitting ? "Submitting..." : "Submit"}
-          </button>
-        </form>
+        <div className={styles.comments}>
+          {/* Comments */}
+          <div className={styles.commentsContainer}>
+            <h3 className={styles.sectionTitle}>Comments</h3>
+            <div className={styles.commentsSection}>
+              {comments.length === 0 ? (
+                <div className={styles.emptyComments}>No comments yet.</div>
+              ) : (
+                <div className={styles.commentsList}>
+                  {[...comments].reverse().map((item, index) => (
+                    <div
+                      key={`${item.timestamp || "comment"}-${index}`}
+                      className={styles.commentItem}
+                      onClick={() => handleCommentItemClick(item.comment)}
+                    >
+                      <div className={styles.commentText}>{item.comment}</div>
+                      {!!item.timestamp && (
+                        <div className={styles.commentTimestamp}>{formatTimestamp(item.timestamp)}</div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Leave a comment */}
+          <div className={styles.leaveCommentSection}>
+            <h4 className={styles.sectionTitle}>Leave a Comment</h4>
+            <form onSubmit={handleSubmit} className={styles.form}>
+              <label className={styles.label}>
+                Email
+                <input
+                  className={styles.input}
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="your@email.com"
+                  required
+                  disabled={submitting}
+                />
+              </label>
+              <label className={styles.label}>
+                Comment
+                <textarea
+                  ref={commentTextareaRef}
+                  className={styles.textarea}
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                  placeholder="Write your comment..."
+                  rows={5}
+                  required
+                  disabled={submitting}
+                />
+              </label>
+              <button
+                type="submit"
+                className={styles.submitButton}
+                disabled={submitting || !email.trim() || !comment.trim()}
+              >
+                {submitting ? "Submitting..." : "Submit"}
+              </button>
+            </form>
+          </div>
+        </div>
       </Modal>
     </>
   );

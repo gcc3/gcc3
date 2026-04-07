@@ -189,7 +189,9 @@ router.get('/api/comments/:content', (req, res) => {
     if (!Array.isArray(comments)) {
       return res.json([]);
     }
-    const filteredComments = comments.filter((item) => item && item.content === content);
+    const filteredComments = comments
+      .filter((item) => item && item.content === content)
+      .map(({ ip, email, ...safeComment }) => safeComment);
     return res.json(filteredComments);
   } catch {
     return res.status(500).json({ error: 'Failed to read comments' });

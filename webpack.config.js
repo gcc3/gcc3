@@ -43,7 +43,12 @@ module.exports = (_, argv = {}) => {
             /** "static" 
              * This property tells Webpack what static file it should serve
             */
-            static: ["./public"],
+            static: {
+                directory: path.resolve(__dirname, "public"),
+                watch: {
+                    ignored: [path.resolve(__dirname, "public/notes/**")],
+                },
+            },
             /** "open" 
              * opens the browser after server is successfully started
             */
